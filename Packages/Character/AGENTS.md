@@ -39,7 +39,7 @@ Bridge doors in this project, the constructors of the types a bridge assembly ad
 
 The binding rules are the line text at https://github.com/Spellbound-Studios/.github/tree/main/line
 
-- The Body and Rig assemblies depend on Core and the engine only.
+- Body depends on Core and the engine only; Rig on those and Body.
 - Cinemachine is reached only through `Spellbound.Character.Cinemachine`, which compiles when the project holds com.unity.cinemachine 3.1.6 or later below 4.0.0, and never on a server build.
 - Log through `Spellbound.Core.Logging.Log`, never through `Debug.Log`.
 - Code under a namespace `Spellbound.Character.*` names StateMachine's machine `global::Spellbound.StateMachine.StateMachine<TContext, TStateKey>`, because the bridge's namespace `Spellbound.Character.StateMachine` hides the bare name there.

@@ -1,7 +1,7 @@
 {
   "name": "Spellbound.Character.Rig",
   "rootNamespace": "Spellbound.Character.Rig",
-  "references": ["Spellbound.Core"],
+  "references": ["Spellbound.Core", "Spellbound.Character.Body"],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

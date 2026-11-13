@@ -8,19 +8,12 @@ using Object = UnityEngine.Object;
 
 namespace Spellbound.Character.Rig {
     public static class RagdollBuilder {
-        internal static Transform ResolveBone(Transform rigRoot, Animator animator, RagdollBoneDefinition definition) {
-            if (definition.UseHumanBone && animator != null && animator.isHuman) {
-                var human = animator.GetBoneTransform(definition.HumanBone);
-
-                if (human != null)
-                    return human;
-            }
-
-            if (rigRoot == null || string.IsNullOrEmpty(definition.BonePath))
-                return null;
-
-            return rigRoot.Find(definition.BonePath);
-        }
+        internal static Transform ResolveBone(Transform rigRoot, Animator animator, RagdollBoneDefinition definition) =>
+                RigBones.Resolve(rigRoot, animator, new RigBoneReference {
+                    UseHumanBone = definition.UseHumanBone,
+                    HumanBone = definition.HumanBone,
+                    BonePath = definition.BonePath
+                });
 
         public static bool Build(
             Transform rigRoot,

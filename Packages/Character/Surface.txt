@@ -153,6 +153,17 @@ member Spellbound.Character.Rig.RagdollBuilder.SetDormant(System.Collections.Gen
 member Spellbound.Character.Rig.RagdollColliderShape.Box : Spellbound.Character.Rig.RagdollColliderShape = 1
 member Spellbound.Character.Rig.RagdollColliderShape.Capsule : Spellbound.Character.Rig.RagdollColliderShape = 0
 member Spellbound.Character.Rig.RagdollColliderShape.Sphere : Spellbound.Character.Rig.RagdollColliderShape = 2
+member Spellbound.Character.Rig.RagdollDryRun.Bones : System.Collections.Generic.IReadOnlyList<Spellbound.Character.Rig.RagdollDryRunBone> { get; }
+member Spellbound.Character.Rig.RagdollDryRun.Error : System.String { get; }
+member Spellbound.Character.Rig.RagdollDryRun.Missing : System.Collections.Generic.IReadOnlyList<System.String> { get; }
+member Spellbound.Character.Rig.RagdollDryRun.ToText() : System.String
+member Spellbound.Character.Rig.RagdollDryRun.WouldBuild : System.Boolean { get; }
+member Spellbound.Character.Rig.RagdollDryRun.new(System.String, System.Collections.Generic.IReadOnlyList<Spellbound.Character.Rig.RagdollDryRunBone>, System.Collections.Generic.IReadOnlyList<System.String>)
+member Spellbound.Character.Rig.RagdollDryRunBone.MassShare : System.Single { get; }
+member Spellbound.Character.Rig.RagdollDryRunBone.Name : System.String { get; }
+member Spellbound.Character.Rig.RagdollDryRunBone.Path : System.String { get; }
+member Spellbound.Character.Rig.RagdollDryRunBone.Shape : Spellbound.Character.Rig.RagdollColliderShape { get; }
+member Spellbound.Character.Rig.RagdollDryRunBone.new(System.String, System.String, Spellbound.Character.Rig.RagdollColliderShape, System.Single)
 member Spellbound.Character.Rig.RagdollFacing.FaceDown : Spellbound.Character.Rig.RagdollFacing = 1
 member Spellbound.Character.Rig.RagdollFacing.FaceUp : Spellbound.Character.Rig.RagdollFacing = 0
 member Spellbound.Character.Rig.RagdollFacing.Side : Spellbound.Character.Rig.RagdollFacing = 2
@@ -188,9 +199,78 @@ member Spellbound.Character.Rig.RagdollProfile.Physics : Spellbound.Character.Ri
 member Spellbound.Character.Rig.RagdollProfile.TotalMass : System.Single { get; }
 member Spellbound.Character.Rig.RagdollProfile.Validate(out System.String) : System.Boolean
 member Spellbound.Character.Rig.RagdollProfile.new()
+member Spellbound.Character.Rig.RebindMap.Bones : System.Collections.Generic.IReadOnlyDictionary<System.String, UnityEngine.Transform> { get; }
+member Spellbound.Character.Rig.RebindMap.IsComplete : System.Boolean { get; }
+member Spellbound.Character.Rig.RebindMap.Missing : System.Collections.Generic.IReadOnlyList<System.String> { get; }
+member Spellbound.Character.Rig.RebindMap.new(System.Collections.Generic.IReadOnlyDictionary<System.String, UnityEngine.Transform>, System.Collections.Generic.IReadOnlyList<System.String>)
+member Spellbound.Character.Rig.ResolvedSocket.HasNode : System.Boolean { get; }
+member Spellbound.Character.Rig.ResolvedSocket.Id : System.String { get; }
+member Spellbound.Character.Rig.ResolvedSocket.LocalPose : UnityEngine.Pose { get; }
+member Spellbound.Character.Rig.ResolvedSocket.Node : UnityEngine.Transform { get; }
+member Spellbound.Character.Rig.ResolvedSocket.Parent : UnityEngine.Transform { get; }
+member Spellbound.Character.Rig.ResolvedSocket.PoseIn(UnityEngine.Transform) : UnityEngine.Pose
+member Spellbound.Character.Rig.ResolvedSocket.new(System.String, UnityEngine.Transform)
+member Spellbound.Character.Rig.ResolvedSocket.new(System.String, UnityEngine.Transform, UnityEngine.Pose)
+member Spellbound.Character.Rig.RigBoneReference.BonePath : System.String
+member Spellbound.Character.Rig.RigBoneReference.Human(UnityEngine.HumanBodyBones) : static Spellbound.Character.Rig.RigBoneReference
+member Spellbound.Character.Rig.RigBoneReference.HumanBone : UnityEngine.HumanBodyBones
+member Spellbound.Character.Rig.RigBoneReference.IsEmpty : System.Boolean { get; }
+member Spellbound.Character.Rig.RigBoneReference.Path(System.String) : static Spellbound.Character.Rig.RigBoneReference
+member Spellbound.Character.Rig.RigBoneReference.UseHumanBone : System.Boolean
+member Spellbound.Character.Rig.RigBones.FindDescendant(UnityEngine.Transform, System.String) : static UnityEngine.Transform
+member Spellbound.Character.Rig.RigBones.PathOf(UnityEngine.Transform, UnityEngine.Transform) : static System.String
+member Spellbound.Character.Rig.RigBones.Resolve(UnityEngine.Transform, UnityEngine.Animator, Spellbound.Character.Rig.RigBoneReference) : static UnityEngine.Transform
 member Spellbound.Character.Rig.RigContract.ContentHash : System.UInt32 { get; }
+member Spellbound.Character.Rig.RigContract.EditableGrips : System.Collections.Generic.List<Spellbound.Character.Rig.RigGrip> { get; }
+member Spellbound.Character.Rig.RigContract.EditablePieces : System.Collections.Generic.List<Spellbound.Character.Rig.RigPieceSlot> { get; }
+member Spellbound.Character.Rig.RigContract.EditablePoses : System.Collections.Generic.List<UnityEngine.AnimationClip> { get; }
+member Spellbound.Character.Rig.RigContract.EditableRequiredBonePaths : System.Collections.Generic.List<System.String> { get; }
+member Spellbound.Character.Rig.RigContract.EditableRequiredHumanBones : System.Collections.Generic.List<UnityEngine.HumanBodyBones> { get; }
+member Spellbound.Character.Rig.RigContract.EditableSockets : System.Collections.Generic.List<Spellbound.Character.Rig.RigSocket> { get; }
+member Spellbound.Character.Rig.RigContract.FindSocket(System.String) : Spellbound.Character.Rig.RigSocket
+member Spellbound.Character.Rig.RigContract.Grips : System.Collections.Generic.IReadOnlyList<Spellbound.Character.Rig.RigGrip> { get; }
+member Spellbound.Character.Rig.RigContract.Hips : Spellbound.Character.Rig.RigHips { get; set; }
+member Spellbound.Character.Rig.RigContract.Kind : Spellbound.Character.Rig.RigKind { get; set; }
+member Spellbound.Character.Rig.RigContract.MaximumHeightMetres : System.Single { get; set; }
+member Spellbound.Character.Rig.RigContract.MinimumHeightMetres : System.Single { get; set; }
+member Spellbound.Character.Rig.RigContract.Pieces : System.Collections.Generic.IReadOnlyList<Spellbound.Character.Rig.RigPieceSlot> { get; }
+member Spellbound.Character.Rig.RigContract.Poses : System.Collections.Generic.IReadOnlyList<UnityEngine.AnimationClip> { get; }
+member Spellbound.Character.Rig.RigContract.RagdollProfile : Spellbound.Character.Rig.RagdollProfile { get; set; }
+member Spellbound.Character.Rig.RigContract.ReferenceFigure : UnityEngine.GameObject { get; set; }
+member Spellbound.Character.Rig.RigContract.RequiredBonePaths : System.Collections.Generic.IReadOnlyList<System.String> { get; }
+member Spellbound.Character.Rig.RigContract.RequiredHumanBones : System.Collections.Generic.IReadOnlyList<UnityEngine.HumanBodyBones> { get; }
+member Spellbound.Character.Rig.RigContract.Sockets : System.Collections.Generic.IReadOnlyList<Spellbound.Character.Rig.RigSocket> { get; }
 member Spellbound.Character.Rig.RigContract.Validate(Spellbound.Core.Authoring.ValidationReport) : System.Void
 member Spellbound.Character.Rig.RigContract.new()
+member Spellbound.Character.Rig.RigGrip.Id : System.String
+member Spellbound.Character.Rig.RigGrip.NodeName : System.String { get; }
+member Spellbound.Character.Rig.RigGrip.NodeNamePattern : System.String
+member Spellbound.Character.Rig.RigGrip.SocketId : System.String
+member Spellbound.Character.Rig.RigGrip.new()
+member Spellbound.Character.Rig.RigHips.Bone : Spellbound.Character.Rig.RigBoneReference
+member Spellbound.Character.Rig.RigHips.FacingAxis : UnityEngine.Vector3
+member Spellbound.Character.Rig.RigHips.HeightMetres : System.Single
+member Spellbound.Character.Rig.RigHips.new()
+member Spellbound.Character.Rig.RigKind.Generic : Spellbound.Character.Rig.RigKind = 1
+member Spellbound.Character.Rig.RigKind.Humanoid : Spellbound.Character.Rig.RigKind = 0
+member Spellbound.Character.Rig.RigPieceSlot.Id : System.String
+member Spellbound.Character.Rig.RigPieceSlot.new()
+member Spellbound.Character.Rig.RigSocket.DefaultLocalEulerAngles : UnityEngine.Vector3
+member Spellbound.Character.Rig.RigSocket.DefaultLocalPose : UnityEngine.Pose { get; }
+member Spellbound.Character.Rig.RigSocket.DefaultLocalPosition : UnityEngine.Vector3
+member Spellbound.Character.Rig.RigSocket.Id : System.String
+member Spellbound.Character.Rig.RigSocket.NodeName : System.String { get; }
+member Spellbound.Character.Rig.RigSocket.NodeNamePattern : System.String
+member Spellbound.Character.Rig.RigSocket.ParentBone : Spellbound.Character.Rig.RigBoneReference
+member Spellbound.Character.Rig.RigSocket.new()
+member Spellbound.Character.Rig.SocketResolver.Resolve(UnityEngine.Transform, UnityEngine.Animator, Spellbound.Character.Rig.RigContract) : static Spellbound.Character.Rig.SocketTable
+member Spellbound.Character.Rig.SocketTable.Count : System.Int32 { get; }
+member Spellbound.Character.Rig.SocketTable.Defaulted : System.Collections.Generic.IReadOnlyList<System.String> { get; }
+member Spellbound.Character.Rig.SocketTable.Ids : System.Collections.Generic.IReadOnlyList<System.String> { get; }
+member Spellbound.Character.Rig.SocketTable.IsComplete : System.Boolean { get; }
+member Spellbound.Character.Rig.SocketTable.Missing : System.Collections.Generic.IReadOnlyList<System.String> { get; }
+member Spellbound.Character.Rig.SocketTable.TryGet(System.String, out Spellbound.Character.Rig.ResolvedSocket) : System.Boolean
+member Spellbound.Character.Rig.SocketTable.new(System.Collections.Generic.IReadOnlyList<Spellbound.Character.Rig.ResolvedSocket>, System.Collections.Generic.IReadOnlyList<System.String>, System.Collections.Generic.IReadOnlyList<System.String>)
 member Spellbound.Character.StateMachine.BodyContext.Capsule : Spellbound.Character.Body.ResizableCapsuleCollider { get; }
 member Spellbound.Character.StateMachine.BodyContext.DesiredMove : UnityEngine.Vector3 { get; set; }
 member Spellbound.Character.StateMachine.BodyContext.ElapsedFixedTime : System.Double { get; set; }
@@ -236,11 +316,45 @@ type Spellbound.Character.Rig.RagdollBone : class
 type Spellbound.Character.Rig.RagdollBoneDefinition : class
 type Spellbound.Character.Rig.RagdollBuilder : static class
 type Spellbound.Character.Rig.RagdollColliderShape : enum
+type Spellbound.Character.Rig.RagdollDryRun : sealed class
+type Spellbound.Character.Rig.RagdollDryRunBone : readonly struct
 type Spellbound.Character.Rig.RagdollFacing : enum
 type Spellbound.Character.Rig.RagdollJointLimits : struct
 type Spellbound.Character.Rig.RagdollPhysicsSettings : class
 type Spellbound.Character.Rig.RagdollProfile : class : UnityEngine.ScriptableObject
+type Spellbound.Character.Rig.RebindMap : sealed class
+type Spellbound.Character.Rig.ResolvedSocket : readonly struct
+type Spellbound.Character.Rig.RigBoneReference : struct
+type Spellbound.Character.Rig.RigBones : static class
 type Spellbound.Character.Rig.RigContract : sealed class : UnityEngine.ScriptableObject, Spellbound.Core.Authoring.IAuthoredDefinition
+type Spellbound.Character.Rig.RigGrip : sealed class
+type Spellbound.Character.Rig.RigHips : sealed class
+type Spellbound.Character.Rig.RigKind : enum
+type Spellbound.Character.Rig.RigPieceSlot : sealed class
+type Spellbound.Character.Rig.RigSocket : sealed class
+type Spellbound.Character.Rig.SocketResolver : static class
+type Spellbound.Character.Rig.SocketTable : sealed class
 type Spellbound.Character.StateMachine.BodyContext : class
 type Spellbound.Character.StateMachine.BodyState : abstract class : Spellbound.StateMachine.State
 type Spellbound.Character.StateMachine.CharacterStateMachineKit : static class
+RigContract.grips : RigGrip list
+RigContract.hips : RigHips
+RigContract.hips.Bone : RigBoneReference
+RigContract.hips.Bone.BonePath : string
+RigContract.hips.Bone.HumanBone : Enum
+RigContract.hips.Bone.UseHumanBone : bool
+RigContract.hips.FacingAxis : Vector3
+RigContract.hips.FacingAxis.x : float
+RigContract.hips.FacingAxis.y : float
+RigContract.hips.FacingAxis.z : float
+RigContract.hips.HeightMetres : float
+RigContract.maximumHeightMetres : float
+RigContract.minimumHeightMetres : float
+RigContract.pieces : RigPieceSlot list
+RigContract.poses : PPtr<$AnimationClip> list
+RigContract.ragdollProfile : PPtr<$RagdollProfile>
+RigContract.referenceFigure : PPtr<$GameObject>
+RigContract.requiredBonePaths : string list
+RigContract.requiredHumanBones : Enum list
+RigContract.rigKind : Enum
+RigContract.sockets : RigSocket list
