@@ -1,33 +1,29 @@
-# Spellbound Controller Library
+# Spellbound.Character
 
-![img.png](img.png)
-We are in the process of making our repositories public and conforming to the UPM standards. This library will be coming
-soon and should be available in the next few weeks. Thanks for your patience! Bookmark this in the meantime.
+A character's body and rig: the capsule, the support probe, the movement maths, the camera seam, the reference frame binding and the playable marker, then the animation seam, the rig contract and the ragdoll builder.
 
-The Controller library is a third person character controller library for Unity developers. It comes equipped with:
+## Install
 
-### API
+Add this line to `Packages/manifest.json`, replacing `<version>` with a release tag:
 
-- Create your own orthogonal or semi-orthogonal state machines
-- Create your own fully encapsulated state code with easy overrides
-- Adjustable camera settings already hooked up
-- Adjustable inputs and easy access to said inputs
-
-### Prefabs
-
-- A free 3D character model with animations (coming soon)
-- A camera rig for you to drag and drop additional cameras
-
-## Installation Instructions
-
-Using the Unity Package Manager you can install from the git URL:
-
-```bash
-https://github.com:Spell-Bound-Studios/Controller.git
+```
+"com.spellboundstudios.character": "https://github.com/Spellbound-Studios/Character.git?path=/Packages/Character#v<version>"
 ```
 
-## Dependencies
+The Spellbound window in Core installs it for you.
 
-## Ecosystem
+## Front door
 
-## Additional Remarks
+`CharacterKit` is the entry point to everything this package offers. `CharacterKit.Body` reaches the body, whose `ReferenceFrameBinding` the game drives: it calls `Bind` when the body gains a frame and `Sight` on every later sighting, and `Update` releases the frame after `HoldSeconds` without one. `CharacterKit.Rig` reaches the rig.
+
+## Cinemachine
+
+The assembly `Spellbound.Character.Cinemachine` holds the camera rig over Cinemachine and compiles only when the project holds com.unity.cinemachine 3.1.6 or later below 4.0.0.
+
+## StateMachine
+
+The assembly `Spellbound.Character.StateMachine` gives StateMachine a body to drive and compiles only when the project holds com.spellboundstudios.statemachine. Its door is `CharacterStateMachineKit.Create(context, configuration)`, which makes a machine over a `BodyContext` from a `StateMachineConfiguration<TStateKey>`. The Locomotion sample builds walk, run, jump and fall on it.
+
+## Rules
+
+The binding rules are the line text at https://github.com/Spellbound-Studios/.github/tree/main/line

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33ede27050c45544bd45afe2401eca2, type: 3}
+  m_Name: RunState
+  m_EditorClassIdentifier: Spellbound.Character.Samples.Locomotion::Spellbound.Character.Samples.Locomotion.RunState
+  guid: 2039426ad63d8e6428a3070aca61eff7
+  hash: 3049267421
+  animationFade: 0.15
+  acceleration: 40
+  turnSpeed: 720
+  runSpeed: 5.5
+  animatorState: Run

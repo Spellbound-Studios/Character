@@ -1,27 +1,19 @@
 {
-  "name": "com.spellboundstudios.controller",
-  "version": "1.1.5",
-  "displayName": "Spellbound.Controller",
-  "description": "This is a player controller library that offers modular states and and state machines to give your character the flexibility to do anything you want in your game world.",
-  "unity": "6000.0",
+  "name": "com.spellboundstudios.character",
+  "version": "0.0.0",
+  "displayName": "Spellbound.Character",
+  "description": "A character's body and rig: the capsule, the support probe, the movement maths, the camera seam, the reference frame binding and the playable marker, then the animation seam, the rig contract and the ragdoll builder.",
+  "unity": "6000.3",
   "author": {
     "name": "Spellbound Studios",
-    "email": "Judsin1349@gmail.com",
-    "url": "https://github.com/Spell-Bound-Studios"
+    "url": "https://github.com/Spellbound-Studios/Character"
   },
-  "dependencies": {
-    "com.unity.inputsystem": "1.13.1",
-    "com.unity.cinemachine": "3.1.6",
-    "com.unity.physics": "1.3.14",
-    "com.unity.entities": "1.3.14",
-    "com.unity.mathematics": "1.3.2",
-    "com.unity.collections": "2.5.7",
-    "com.spellboundstudios.core": "1.0.0"
-  },
-  "keywords": [
-    "controller",
-    "state-machine",
-    "player",
-    "character"
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Locomotion",
+      "description": "Walk, run, jump and fall over StateMachine, on a character that carries the playable marker.",
+      "path": "Samples~/Locomotion"
+    }
   ]
 }
