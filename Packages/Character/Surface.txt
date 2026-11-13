@@ -88,6 +88,7 @@ member Spellbound.Character.Body.VelocityMath.NormalizeInputDirection(UnityEngin
 member Spellbound.Character.CharacterKit.Body.IsPlayable(UnityEngine.GameObject) : static System.Boolean
 member Spellbound.Character.CharacterKit.Rig.BuildRagdoll(UnityEngine.Transform, UnityEngine.Animator, Spellbound.Character.Rig.RagdollProfile, System.Collections.Generic.List<Spellbound.Character.Rig.RagdollBone>, out System.String) : static System.Boolean
 member Spellbound.Character.CharacterKit.Rig.HoldPose(UnityEngine.Transform, Spellbound.Character.Rig.RigContract, System.String, Spellbound.Core.Authoring.ValidationReport) : static UnityEngine.Pose
+member Spellbound.Character.CharacterKit.Rig.ResolveSockets(UnityEngine.Transform, Spellbound.Character.Rig.RigContract) : static Spellbound.Character.Rig.SocketTable
 member Spellbound.Character.Cinemachine.AimCore.HorizontalLook : Unity.Cinemachine.InputAxis
 member Spellbound.Character.Cinemachine.AimCore.SetLookDirection(UnityEngine.Vector3) : System.Void
 member Spellbound.Character.Cinemachine.AimCore.VerticalLook : Unity.Cinemachine.InputAxis
