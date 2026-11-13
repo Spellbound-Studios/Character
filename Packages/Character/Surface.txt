@@ -87,8 +87,11 @@ member Spellbound.Character.Body.VelocityMath.GetVerticalSpeed(UnityEngine.Rigid
 member Spellbound.Character.Body.VelocityMath.NormalizeInputDirection(UnityEngine.Vector2) : static UnityEngine.Vector2
 member Spellbound.Character.CharacterKit.Body.IsPlayable(UnityEngine.GameObject) : static System.Boolean
 member Spellbound.Character.CharacterKit.Rig.BuildRagdoll(UnityEngine.Transform, UnityEngine.Animator, Spellbound.Character.Rig.RagdollProfile, System.Collections.Generic.List<Spellbound.Character.Rig.RagdollBone>, out System.String) : static System.Boolean
+member Spellbound.Character.CharacterKit.Rig.DryRunRagdoll(UnityEngine.Transform, Spellbound.Character.Rig.RagdollProfile) : static Spellbound.Character.Rig.RagdollDryRun
 member Spellbound.Character.CharacterKit.Rig.HoldPose(UnityEngine.Transform, Spellbound.Character.Rig.RigContract, System.String, Spellbound.Core.Authoring.ValidationReport) : static UnityEngine.Pose
 member Spellbound.Character.CharacterKit.Rig.ResolveSockets(UnityEngine.Transform, Spellbound.Character.Rig.RigContract) : static Spellbound.Character.Rig.SocketTable
+member Spellbound.Character.CharacterOperations.Ragdoll(Spellbound.Core.Operations.OperationContext, UnityEngine.GameObject, Spellbound.Character.Rig.RagdollProfile) : static Spellbound.Core.Operations.OperationResult
+member Spellbound.Character.CharacterOperations.Sockets(Spellbound.Core.Operations.OperationContext, UnityEngine.GameObject, Spellbound.Character.Rig.RigContract) : static Spellbound.Core.Operations.OperationResult
 member Spellbound.Character.Cinemachine.AimCore.HorizontalLook : Unity.Cinemachine.InputAxis
 member Spellbound.Character.Cinemachine.AimCore.SetLookDirection(UnityEngine.Vector3) : System.Void
 member Spellbound.Character.Cinemachine.AimCore.VerticalLook : Unity.Cinemachine.InputAxis
@@ -154,6 +157,7 @@ member Spellbound.Character.Rig.RagdollBoneDefinition.new()
 member Spellbound.Character.Rig.RagdollBuilder.ApplyPhysicsSettings(Spellbound.Character.Rig.RagdollBone, Spellbound.Character.Rig.RagdollPhysicsSettings) : static System.Void
 member Spellbound.Character.Rig.RagdollBuilder.Build(UnityEngine.Transform, UnityEngine.Animator, Spellbound.Character.Rig.RagdollProfile, System.Collections.Generic.List<Spellbound.Character.Rig.RagdollBone>, out System.String) : static System.Boolean
 member Spellbound.Character.Rig.RagdollBuilder.Clear(System.Collections.Generic.List<Spellbound.Character.Rig.RagdollBone>) : static System.Void
+member Spellbound.Character.Rig.RagdollBuilder.DryRun(UnityEngine.Transform, UnityEngine.Animator, Spellbound.Character.Rig.RagdollProfile) : static Spellbound.Character.Rig.RagdollDryRun
 member Spellbound.Character.Rig.RagdollBuilder.IgnoreSelfCollision(System.Collections.Generic.IReadOnlyList<UnityEngine.Collider>) : static System.Void
 member Spellbound.Character.Rig.RagdollBuilder.SetDormant(System.Collections.Generic.IReadOnlyList<Spellbound.Character.Rig.RagdollBone>) : static System.Void
 member Spellbound.Character.Rig.RagdollColliderShape.Box : Spellbound.Character.Rig.RagdollColliderShape = 1
@@ -305,6 +309,7 @@ type Spellbound.Character.Body.VelocityMath : static class
 type Spellbound.Character.CharacterKit : static class
 type Spellbound.Character.CharacterKit.Body : static class
 type Spellbound.Character.CharacterKit.Rig : static class
+type Spellbound.Character.CharacterOperations : static class
 type Spellbound.Character.Cinemachine.AimCore : class : UnityEngine.MonoBehaviour, Unity.Cinemachine.IInputAxisOwner
 type Spellbound.Character.Cinemachine.CameraProximityBodyHider : class : UnityEngine.MonoBehaviour
 type Spellbound.Character.Cinemachine.CameraRigManager : class : Unity.Cinemachine.CinemachineCameraManagerBase, Spellbound.Character.Body.ICameraRig

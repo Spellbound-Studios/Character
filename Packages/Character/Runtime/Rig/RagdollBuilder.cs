@@ -8,6 +8,8 @@ using Object = UnityEngine.Object;
 
 namespace Spellbound.Character.Rig {
     public static class RagdollBuilder {
+        private const string NoProfileError = "No ragdoll profile assigned.";
+
         internal static Transform ResolveBone(Transform rigRoot, Animator animator, RagdollBoneDefinition definition) =>
                 RigBones.Resolve(rigRoot, animator, new RigBoneReference {
                     UseHumanBone = definition.UseHumanBone,
@@ -29,6 +31,39 @@ namespace Spellbound.Character.Rig {
             return false;
         }
 
+        public static RagdollDryRun DryRun(Transform rigRoot, Animator animator, RagdollProfile profile) {
+            if (profile == null)
+                return new RagdollDryRun(NoProfileError, Array.Empty<RagdollDryRunBone>(), Array.Empty<string>());
+
+            if (!profile.Validate(out var error))
+                return new RagdollDryRun(error, Array.Empty<RagdollDryRunBone>(), Array.Empty<string>());
+
+            var definitions = profile.Bones;
+            var boneTransforms = ResolveBones(rigRoot, animator, definitions);
+            var bones = new List<RagdollDryRunBone>(definitions.Count);
+            var missing = new List<string>();
+
+            for (var i = 0; i < definitions.Count; i++) {
+                var definition = definitions[i];
+                var boneTransform = boneTransforms[i];
+
+                if (boneTransform == null) {
+                    missing.Add(definition.Name);
+
+                    continue;
+                }
+
+                bones.Add(new RagdollDryRunBone(definition.Name, RigBones.PathOf(rigRoot, boneTransform),
+                    definition.Shape, definition.MassShare));
+            }
+
+            if (!TryFindUnresolved(boneTransforms, definitions, out error) ||
+                !TryCheckColliders(boneTransforms, definitions, out error))
+                return new RagdollDryRun(error, bones, missing);
+
+            return new RagdollDryRun(string.Empty, bones, missing);
+        }
+
         private static bool TryBuild(
             Transform rigRoot,
             Animator animator,
@@ -44,7 +79,7 @@ namespace Spellbound.Character.Rig {
             output.Clear();
 
             if (profile == null) {
-                error = "No ragdoll profile assigned.";
+                error = NoProfileError;
 
                 return false;
             }
@@ -85,20 +120,36 @@ namespace Spellbound.Character.Rig {
             IReadOnlyList<RagdollBoneDefinition> definitions,
             out Transform[] boneTransforms,
             out string error) {
-            boneTransforms = new Transform[definitions.Count];
+            boneTransforms = ResolveBones(rigRoot, animator, definitions);
 
+            return TryFindUnresolved(boneTransforms, definitions, out error);
+        }
+
+        private static Transform[] ResolveBones(
+            Transform rigRoot,
+            Animator animator,
+            IReadOnlyList<RagdollBoneDefinition> definitions) {
+            var boneTransforms = new Transform[definitions.Count];
+
+            for (var i = 0; i < definitions.Count; i++)
+                boneTransforms[i] = ResolveBone(rigRoot, animator, definitions[i]);
+
+            return boneTransforms;
+        }
+
+        private static bool TryFindUnresolved(
+            Transform[] boneTransforms,
+            IReadOnlyList<RagdollBoneDefinition> definitions,
+            out string error) {
             for (var i = 0; i < definitions.Count; i++) {
+                if (boneTransforms[i] != null)
+                    continue;
+
                 var definition = definitions[i];
-                var boneTransform = ResolveBone(rigRoot, animator, definition);
+                error = $"Bone {i} ({definition.Name}) could not be resolved. " +
+                        $"Path '{definition.BonePath}', human bone {definition.HumanBone}.";
 
-                if (boneTransform == null) {
-                    error = $"Bone {i} ({definition.Name}) could not be resolved. " +
-                            $"Path '{definition.BonePath}', human bone {definition.HumanBone}.";
-
-                    return false;
-                }
-
-                boneTransforms[i] = boneTransform;
+                return false;
             }
 
             error = null;

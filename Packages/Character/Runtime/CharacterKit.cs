@@ -30,6 +30,9 @@ namespace Spellbound.Character {
 
             public static SocketTable ResolveSockets(Transform modelRoot, RigContract contract) =>
                 SocketResolver.Resolve(modelRoot, modelRoot.GetComponent<Animator>(), contract);
+
+            public static RagdollDryRun DryRunRagdoll(Transform modelRoot, RagdollProfile profile) =>
+                RagdollBuilder.DryRun(modelRoot, modelRoot.GetComponent<Animator>(), profile);
         }
     }
 }
