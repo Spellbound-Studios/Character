@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Spellbound.Character.Body;
 using Spellbound.Character.Rig;
+using Spellbound.Core.Authoring;
 using UnityEngine;
 
 namespace Spellbound.Character {
@@ -19,6 +20,19 @@ namespace Spellbound.Character {
                 List<RagdollBone> output,
                 out string error) =>
                     RagdollBuilder.Build(rigRoot, animator, profile, output, out error);
+
+            public static Pose HoldPose(
+                Transform gripNode,
+                RigContract contract,
+                string socketId,
+                ValidationReport report) =>
+                    GripPlacement.HoldPose(gripNode, contract, socketId, report);
+
+            public static SocketTable ResolveSockets(Transform modelRoot, RigContract contract) =>
+                SocketResolver.Resolve(modelRoot, modelRoot.GetComponent<Animator>(), contract);
+
+            public static RagdollDryRun DryRunRagdoll(Transform modelRoot, RagdollProfile profile) =>
+                RagdollBuilder.DryRun(modelRoot, modelRoot.GetComponent<Animator>(), profile);
         }
     }
 }

@@ -1,7 +1,7 @@
 {
   "name": "Spellbound.Character.Editor.Tests",
   "rootNamespace": "Spellbound.Character.Editor.Tests",
-  "references": ["Spellbound.Character", "Spellbound.Character.Body", "Spellbound.Character.Rig", "Spellbound.Character.Tests", "Spellbound.Core", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+  "references": ["Spellbound.Character", "Spellbound.Character.Body", "Spellbound.Character.Editor", "Spellbound.Character.Rig", "Spellbound.Character.Tests", "Spellbound.Core", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
   "includePlatforms": ["Editor"],
   "excludePlatforms": [],
   "allowUnsafeCode": false,
