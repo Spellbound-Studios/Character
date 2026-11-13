@@ -12,7 +12,7 @@ Beneath it: `RagdollBuilder.IgnoreSelfCollision(colliders)` turns off collision 
 
 StateMachine, in the bridge `Spellbound.Character.StateMachine`, which compiles only when the project holds com.spellboundstudios.statemachine: `BodyContext` carries a body's transform, rigidbody, capsule, latest support probe, reference frame binding, desired move and the elapsed fixed time the binding takes, and `BodyState` is the abstract `State` whose `Body` is that context. A body's machine is configured with StateMachine's own `StateBinding<TStateKey>` and `StateMachineConfiguration<TStateKey>` and made with `CharacterStateMachineKit.Create(context, configuration)`, which forwards to `StateMachineKit.Create`. The Locomotion sample builds walk, run, jump and fall on them.
 
-Presentation, in `Spellbound.Character.Presentation`, which compiles out on a server build: `MeshBoundsMath.FindSharedMeshBounds(gameObject)` gives the mesh bounds `ResizableCapsuleCollider.Initialize` sizes the capsule from. The editor operation `Spellbound/Character/Measure Capsule From Mesh`, in `Spellbound.Character.Presentation.Editor`, measures a selected object of a prefab through it and writes the capsule into the prefab.
+Presentation, in `Spellbound.Character.Presentation`, which compiles out on a server build: `MeshBoundsMath.FindSharedMeshBounds(gameObject)` gives the mesh bounds `ResizableCapsuleCollider.Initialize` sizes the capsule from. `WornPieceRebinding.Rebind(wornPiece, targetRoot)` rebinds a worn piece to a target rig in edit mode with no scene: it matches the names of every `SkinnedMeshRenderer` bone and root bone under the piece, the piece itself included, to the first transform of that name under the target root, the root itself included, and when every name is found rewrites each renderer's bones and root bone to the target's and returns a complete `RebindMap`. When any name is missing it changes nothing and returns the map with `Missing` listing each missing name once and `Bones` holding the names it found; it instantiates nothing and adds nothing, and a null piece or target root throws ArgumentNullException. The editor operation `Spellbound/Character/Measure Capsule From Mesh`, in `Spellbound.Character.Presentation.Editor`, measures a selected object of a prefab through it and writes the capsule into the prefab.
 
 <!-- spellbound:samples 3a8448c2 -->
 Samples in `Samples~`, imported from the Package Manager's Samples tab:
@@ -39,7 +39,7 @@ Bridge doors in this project, the constructors of the types a bridge assembly ad
 
 The binding rules are the line text at https://github.com/Spellbound-Studios/.github/tree/main/line
 
-- Body depends on Core and the engine only; Rig on those and Body.
+- Body depends on Core and the engine only; Rig on those and Body; Presentation on the engine and Rig.
 - Cinemachine is reached only through `Spellbound.Character.Cinemachine`, which compiles when the project holds com.unity.cinemachine 3.1.6 or later below 4.0.0, and never on a server build.
 - Log through `Spellbound.Core.Logging.Log`, never through `Debug.Log`.
 - Code under a namespace `Spellbound.Character.*` names StateMachine's machine `global::Spellbound.StateMachine.StateMachine<TContext, TStateKey>`, because the bridge's namespace `Spellbound.Character.StateMachine` hides the bare name there.

@@ -120,6 +120,7 @@ member Spellbound.Character.Editor.BuildRagdollWindow.new()
 member Spellbound.Character.Editor.RigKindMapping.ToAnimationType(Spellbound.Character.Rig.RigKind) : static UnityEditor.ModelImporterAnimationType
 member Spellbound.Character.Editor.RigKindMapping.TryFromAnimationType(UnityEditor.ModelImporterAnimationType, out Spellbound.Character.Rig.RigKind) : static System.Boolean
 member Spellbound.Character.Presentation.MeshBoundsMath.FindSharedMeshBounds(UnityEngine.GameObject) : static System.Nullable<UnityEngine.Bounds>
+member Spellbound.Character.Presentation.WornPieceRebinding.Rebind(UnityEngine.GameObject, UnityEngine.Transform) : static Spellbound.Character.Rig.RebindMap
 member Spellbound.Character.Rig.AnimationMath.NormalizeBlend(System.Single, System.ReadOnlySpan<System.Single>) : static System.Single
 member Spellbound.Character.Rig.AnimationMath.SpeedWarp(System.Single, System.Single) : static System.Single
 member Spellbound.Character.Rig.AnimatorAnimationController.Animator : UnityEngine.Animator { get; }
@@ -314,6 +315,7 @@ type Spellbound.Character.Editor.RigKindMapping : static class
 type Spellbound.Character.Editor.SnapToGroundMenu : static class
 type Spellbound.Character.Presentation.Editor.MeasureCapsuleFromMeshMenu : static class
 type Spellbound.Character.Presentation.MeshBoundsMath : static class
+type Spellbound.Character.Presentation.WornPieceRebinding : static class
 type Spellbound.Character.Rig.AnimationMath : static class
 type Spellbound.Character.Rig.AnimatorAnimationController : sealed class : Spellbound.Character.Rig.IAnimationController
 type Spellbound.Character.Rig.GripPlacement : static class
