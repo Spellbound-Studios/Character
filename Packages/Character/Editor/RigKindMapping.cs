@@ -10,7 +10,8 @@ namespace Spellbound.Character.Editor {
                 kind switch {
                     RigKind.Humanoid => ModelImporterAnimationType.Human,
                     RigKind.Generic => ModelImporterAnimationType.Generic,
-                    _ => throw new ArgumentOutOfRangeException(nameof(kind), kind, "The rig kind has no animation type.")
+                    _ => throw new ArgumentOutOfRangeException(nameof(kind), kind,
+                            "The rig kind has no animation type.")
                 };
 
         public static bool TryFromAnimationType(ModelImporterAnimationType type, out RigKind kind) {
