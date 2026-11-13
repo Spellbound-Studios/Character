@@ -1,0 +1,30 @@
+{
+  "name": "Spellbound.Character.Samples.Locomotion.Tests",
+  "rootNamespace": "Spellbound.Character.Samples.Locomotion.Tests",
+  "references": ["Spellbound.Character.Samples.Locomotion", "Spellbound.Character.StateMachine", "Spellbound.Character.Body", "Spellbound.StateMachine", "Spellbound.Core", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": ["SPELLBOUND_CORE", "UNITY_INCLUDE_TESTS", "SPELLBOUND_STATEMACHINE", "SPELLBOUND_INPUTSYSTEM", "!UNITY_SERVER"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.spellboundstudios.statemachine",
+      "expression": "[0.0.0,2.0.0)",
+      "define": "SPELLBOUND_STATEMACHINE"
+    },
+    {
+      "name": "com.unity.inputsystem",
+      "expression": "[1.0.0,2.0.0)",
+      "define": "SPELLBOUND_INPUTSYSTEM"
+    }
+  ],
+  "noEngineReferences": false
+}

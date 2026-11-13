@@ -1,0 +1,19 @@
+{
+  "name": "com.spellboundstudios.character",
+  "version": "0.0.0",
+  "displayName": "Spellbound.Character",
+  "description": "A character's body and rig: the capsule, the support probe, the movement maths, the camera seam, the reference frame binding and the playable marker, then the animation seam, the rig contract and the ragdoll builder.",
+  "unity": "6000.3",
+  "author": {
+    "name": "Spellbound Studios",
+    "url": "https://github.com/Spellbound-Studios/Character"
+  },
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Locomotion",
+      "description": "Walk, run, jump and fall over StateMachine, on a character that carries the playable marker.",
+      "path": "Samples~/Locomotion"
+    }
+  ]
+}

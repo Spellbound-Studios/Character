@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6584b913e18e51e4d9782f585554c838, type: 3}
+  m_Name: FallState
+  m_EditorClassIdentifier: Spellbound.Character.Samples.Locomotion::Spellbound.Character.Samples.Locomotion.FallState
+  guid: 8ad3cd600fc6c7f4d821dd493e54942f
+  hash: 2002364123
+  animationFade: 0.15
+  airSpeed: 4
+  airAcceleration: 10
+  airTurnSpeed: 360
+  animatorState: Fall

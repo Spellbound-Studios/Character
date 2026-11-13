@@ -1,0 +1,25 @@
+{
+  "name": "Spellbound.Character.StateMachine",
+  "rootNamespace": "Spellbound.Character.StateMachine",
+  "references": ["Spellbound.Core", "Spellbound.Character.Body", "Spellbound.StateMachine"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": ["SPELLBOUND_CORE", "SPELLBOUND_STATEMACHINE"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.spellboundstudios.statemachine",
+      "expression": "[0.0.0,2.0.0)",
+      "define": "SPELLBOUND_STATEMACHINE"
+    }
+  ],
+  "noEngineReferences": false
+}

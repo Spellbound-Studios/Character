@@ -1,0 +1,25 @@
+{
+  "name": "Spellbound.Character.StateMachine.Editor.Tests",
+  "rootNamespace": "Spellbound.Character.StateMachine.Editor.Tests",
+  "references": ["Spellbound.Character.StateMachine", "Spellbound.Character.Body", "Spellbound.StateMachine", "Spellbound.Core", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": ["SPELLBOUND_CORE", "UNITY_INCLUDE_TESTS", "SPELLBOUND_STATEMACHINE"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.spellboundstudios.statemachine",
+      "expression": "[0.0.0,2.0.0)",
+      "define": "SPELLBOUND_STATEMACHINE"
+    }
+  ],
+  "noEngineReferences": false
+}

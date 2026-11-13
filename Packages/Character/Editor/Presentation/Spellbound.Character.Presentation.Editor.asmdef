@@ -1,0 +1,20 @@
+{
+  "name": "Spellbound.Character.Presentation.Editor",
+  "rootNamespace": "Spellbound.Character.Presentation.Editor",
+  "references": ["Spellbound.Core", "Spellbound.Character.Body", "Spellbound.Character.Presentation"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": ["SPELLBOUND_CORE", "!UNITY_SERVER"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    }
+  ],
+  "noEngineReferences": false
+}

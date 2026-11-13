@@ -1,0 +1,30 @@
+{
+  "name": "Spellbound.Character.Samples.Locomotion",
+  "rootNamespace": "Spellbound.Character.Samples.Locomotion",
+  "references": ["Spellbound.Core", "Spellbound.Character.Body", "Spellbound.Character.Rig", "Spellbound.Character.StateMachine", "Spellbound.StateMachine", "Unity.InputSystem"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": ["SPELLBOUND_CORE", "SPELLBOUND_STATEMACHINE", "SPELLBOUND_INPUTSYSTEM", "!UNITY_SERVER"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.spellboundstudios.statemachine",
+      "expression": "[0.0.0,2.0.0)",
+      "define": "SPELLBOUND_STATEMACHINE"
+    },
+    {
+      "name": "com.unity.inputsystem",
+      "expression": "[1.0.0,2.0.0)",
+      "define": "SPELLBOUND_INPUTSYSTEM"
+    }
+  ],
+  "noEngineReferences": false
+}

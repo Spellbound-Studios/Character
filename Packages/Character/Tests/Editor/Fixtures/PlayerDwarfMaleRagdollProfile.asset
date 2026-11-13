@@ -1,0 +1,242 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80a90cafa07448a8768456c6089c9e5, type: 3}
+  m_Name: PlayerDwarfMaleRagdollProfile
+  m_EditorClassIdentifier: Assembly-CSharp::Spellbound.Saboteur.Ragdolls.RagdollProfile
+  bones:
+  - Name: Hips
+    BonePath: Rig/B-root/B-hips
+    UseHumanBone: 1
+    HumanBone: 0
+    ParentIndex: -1
+    Shape: 1
+    ColliderCenter: {x: 0, y: 0.07874164, z: -0.008578098}
+    ColliderSize: {x: 0.31683, y: 0.17807077, z: 0.20613621}
+    CapsuleDirection: 1
+    MassShare: 0.14018694
+    Joint:
+      LowTwist: 0
+      HighTwist: 0
+      Swing1: 0
+      Swing2: 0
+      Axis: {x: 0, y: 0, z: 0}
+      SwingAxis: {x: 0, y: 0, z: 0}
+  - Name: Spine
+    BonePath: Rig/B-root/B-hips/B-spine
+    UseHumanBone: 1
+    HumanBone: 7
+    ParentIndex: 0
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.08458113, z: 0}
+    ColliderSize: {x: 0.076123014, y: 0.16916226, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.09345795
+    Joint:
+      LowTwist: -20
+      HighTwist: 40
+      Swing1: 20
+      Swing2: 20
+      Axis: {x: 1, y: 0, z: 0}
+      SwingAxis: {x: 0, y: 0.0000004917383, z: 1}
+  - Name: Chest
+    BonePath: Rig/B-root/B-hips/B-spine/B-chest
+    UseHumanBone: 1
+    HumanBone: 8
+    ParentIndex: 1
+    Shape: 1
+    ColliderCenter: {x: 0, y: 0.10805204, z: 0.009020457}
+    ColliderSize: {x: 0.38183585, y: 0.23357514, z: 0.2273227}
+    CapsuleDirection: 1
+    MassShare: 0.1869159
+    Joint:
+      LowTwist: -20
+      HighTwist: 30
+      Swing1: 15
+      Swing2: 15
+      Axis: {x: 1, y: 0, z: 0}
+      SwingAxis: {x: 0, y: 0.0000005066395, z: 1}
+  - Name: Head
+    BonePath: Rig/B-root/B-hips/B-spine/B-chest/B-neck/B-head
+    UseHumanBone: 1
+    HumanBone: 10
+    ParentIndex: 2
+    Shape: 2
+    ColliderCenter: {x: 1.5099033e-14, y: 0.084852464, z: -0.0000000037252907}
+    ColliderSize: {x: 0.106065504, y: 0, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.07476636
+    Joint:
+      LowTwist: -40
+      HighTwist: 40
+      Swing1: 30
+      Swing2: 30
+      Axis: {x: 1, y: -2.842171e-13, z: -4.689582e-13}
+      SwingAxis: {x: 5.684342e-13, y: 0.00000023841858, z: 0.99999994}
+  - Name: Left Upper Arm
+    BonePath: Rig/B-root/B-hips/B-spine/B-chest/B-shoulder.L/B-upperArm.L
+    UseHumanBone: 1
+    HumanBone: 13
+    ParentIndex: 2
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.093501866, z: 0}
+    ColliderSize: {x: 0.03740075, y: 0.18700373, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.03738318
+    Joint:
+      LowTwist: -60
+      HighTwist: 100
+      Swing1: 70
+      Swing2: 40
+      Axis: {x: 0.99995744, y: -0.0000017136335, z: -0.009238124}
+      SwingAxis: {x: 0.009238084, y: 0.0000014149118, z: 0.9999575}
+  - Name: Left Forearm
+    BonePath: Rig/B-root/B-hips/B-spine/B-chest/B-shoulder.L/B-upperArm.L/B-forearm.L
+    UseHumanBone: 1
+    HumanBone: 15
+    ParentIndex: 4
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.091602065, z: 0}
+    ColliderSize: {x: 0.036640827, y: 0.18320413, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.028037384
+    Joint:
+      LowTwist: -5
+      HighTwist: 140
+      Swing1: 5
+      Swing2: 30
+      Axis: {x: 0.99996674, y: 0.0000007603503, z: -0.0081825415}
+      SwingAxis: {x: 0.00818233, y: 0.000011310214, z: 0.99996686}
+  - Name: Right Upper Arm
+    BonePath: Rig/B-root/B-hips/B-spine/B-chest/B-shoulder.R/B-upperArm.R
+    UseHumanBone: 1
+    HumanBone: 14
+    ParentIndex: 2
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.093501866, z: 0}
+    ColliderSize: {x: 0.03740075, y: 0.18700373, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.03738318
+    Joint:
+      LowTwist: -60
+      HighTwist: 100
+      Swing1: 70
+      Swing2: 40
+      Axis: {x: 0.99995744, y: 0.0000017136335, z: 0.009238124}
+      SwingAxis: {x: -0.009238084, y: 0.0000014149118, z: 0.9999575}
+  - Name: Right Forearm
+    BonePath: Rig/B-root/B-hips/B-spine/B-chest/B-shoulder.R/B-upperArm.R/B-forearm.R
+    UseHumanBone: 1
+    HumanBone: 16
+    ParentIndex: 6
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.091602065, z: 0}
+    ColliderSize: {x: 0.036640827, y: 0.18320413, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.028037384
+    Joint:
+      LowTwist: -5
+      HighTwist: 140
+      Swing1: 5
+      Swing2: 30
+      Axis: {x: 0.99996674, y: -0.0000007603503, z: 0.0081825415}
+      SwingAxis: {x: -0.00818233, y: 0.000011310214, z: 0.99996686}
+  - Name: Left Thigh
+    BonePath: Rig/B-root/B-hips/B-thigh.L
+    UseHumanBone: 1
+    HumanBone: 1
+    ParentIndex: 0
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.14888331, z: 0}
+    ColliderSize: {x: 0.07146399, y: 0.29776663, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.11214954
+    Joint:
+      LowTwist: -30
+      HighTwist: 100
+      Swing1: 40
+      Swing2: 30
+      Axis: {x: -0.99962276, y: -0.00000017881393, z: -0.027466169}
+      SwingAxis: {x: 0.027466172, y: -0.000001013279, z: -0.9996227}
+  - Name: Left Shin
+    BonePath: Rig/B-root/B-hips/B-thigh.L/B-shin.L
+    UseHumanBone: 1
+    HumanBone: 3
+    ParentIndex: 8
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.12843412, z: 0}
+    ColliderSize: {x: 0.061648376, y: 0.25686824, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.07476636
+    Joint:
+      LowTwist: -5
+      HighTwist: 130
+      Swing1: 5
+      Swing2: 20
+      Axis: {x: 0.9997758, y: 0.0000009918585, z: 0.021174496}
+      SwingAxis: {x: -0.021174494, y: -0.0000016838312, z: 0.9997758}
+  - Name: Right Thigh
+    BonePath: Rig/B-root/B-hips/B-thigh.R
+    UseHumanBone: 1
+    HumanBone: 2
+    ParentIndex: 0
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.14888342, z: 0}
+    ColliderSize: {x: 0.07146404, y: 0.29776683, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.11214954
+    Joint:
+      LowTwist: -30
+      HighTwist: 100
+      Swing1: 40
+      Swing2: 30
+      Axis: {x: -0.9996226, y: -0.00000078976154, z: 0.027471066}
+      SwingAxis: {x: -0.027471066, y: -0.0000027269125, z: -0.9996227}
+  - Name: Right Shin
+    BonePath: Rig/B-root/B-hips/B-thigh.R/B-shin.R
+    UseHumanBone: 1
+    HumanBone: 4
+    ParentIndex: 10
+    Shape: 0
+    ColliderCenter: {x: 0, y: 0.12843415, z: 0}
+    ColliderSize: {x: 0.06164839, y: 0.2568683, z: 0}
+    CapsuleDirection: 1
+    MassShare: 0.07476636
+    Joint:
+      LowTwist: -5
+      HighTwist: 130
+      Swing1: 5
+      Swing2: 20
+      Axis: {x: 0.9997757, y: -0.00000032410026, z: -0.021179616}
+      SwingAxis: {x: 0.021179616, y: -0.0000032782555, z: 0.9997757}
+  totalMass: 70
+  physics:
+    SolverIterations: 8
+    SolverVelocityIterations: 2
+    LinearDamping: 0.05
+    AngularDamping: 0.5
+    MaxAngularVelocity: 20
+    MaxDepenetrationVelocity: 5
+    Interpolation: 1
+    CollisionDetection: 3
+    ExcludeLayers:
+      serializedVersion: 2
+      m_Bits: 128
+    IgnoreSelfCollision: 1
+    EnableProjection: 1
+    ProjectionDistance: 0.05
+    ProjectionAngle: 30
+    EnablePreprocessing: 1
+  hipsForwardLocal: {x: 0, y: 0.108299054, z: 0.99411833}
+  hipsUpLocal: {x: 0, y: 0.99411833, z: -0.108299054}
+  hipsHeight: 0.706554
+  defaultBlendOutSeconds: 0.4
+  defaultBlendHoldSeconds: 0.1
