@@ -57,7 +57,7 @@ namespace Spellbound.Character.Rig {
                     definition.Shape, definition.MassShare));
             }
 
-            if (!TryFindUnresolved(boneTransforms, definitions, out error) ||
+            if (!TryRequireResolved(boneTransforms, definitions, out error) ||
                 !TryCheckColliders(boneTransforms, definitions, out error))
                 return new RagdollDryRun(error, bones, missing);
 
@@ -122,7 +122,7 @@ namespace Spellbound.Character.Rig {
             out string error) {
             boneTransforms = ResolveBones(rigRoot, animator, definitions);
 
-            return TryFindUnresolved(boneTransforms, definitions, out error);
+            return TryRequireResolved(boneTransforms, definitions, out error);
         }
 
         private static Transform[] ResolveBones(
@@ -137,7 +137,7 @@ namespace Spellbound.Character.Rig {
             return boneTransforms;
         }
 
-        private static bool TryFindUnresolved(
+        private static bool TryRequireResolved(
             Transform[] boneTransforms,
             IReadOnlyList<RagdollBoneDefinition> definitions,
             out string error) {

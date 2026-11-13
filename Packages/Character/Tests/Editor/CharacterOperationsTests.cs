@@ -77,7 +77,8 @@ namespace Spellbound.Character.Editor.Tests {
 
         [Test]
         public void Ragdoll_OnACompleteModel_WouldBuild() {
-            var text = Text("character ragdoll --root scene:/" + FigureName + " --profile asset:" + CompleteProfilePath);
+            var text = Text("character ragdoll --root scene:/" + FigureName + " --profile asset:"
+                            + CompleteProfilePath);
 
             StringAssert.StartsWith("succeeded: would build 2 bones", text);
         }
