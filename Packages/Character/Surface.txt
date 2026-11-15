@@ -103,6 +103,7 @@ member Spellbound.Character.Body.RidingSettings.Validate(Spellbound.Core.Authori
 member Spellbound.Character.Body.RidingSettings.new()
 member Spellbound.Character.Body.RidingSettings.rideableLayers : UnityEngine.LayerMask
 member Spellbound.Character.Body.RigidbodyReferenceFrameSource.AngularVelocity : override UnityEngine.Vector3 { get; }
+member Spellbound.Character.Body.RigidbodyReferenceFrameSource.Move(UnityEngine.Pose) : System.Void
 member Spellbound.Character.Body.RigidbodyReferenceFrameSource.VelocityAt(UnityEngine.Vector3) : override UnityEngine.Vector3
 member Spellbound.Character.Body.RigidbodyReferenceFrameSource.WorldPose : override UnityEngine.Pose { get; }
 member Spellbound.Character.Body.RigidbodyReferenceFrameSource.new()

@@ -29,21 +29,28 @@ namespace Spellbound.Character.Body {
 
         private readonly RaycastHit[] _hits = new RaycastHit[HitCapacity];
         private Rigidbody _body;
+        private IReferenceFrameWorld _handedWorld;
         private IReferenceFrameWorld _resolvedWorld;
+        private bool _missingWorldReported;
         private int _stepsSinceProbe;
 
         public ReferenceFrameBinding Binding => binding;
 
-        public IReferenceFrameWorld World { get; set; }
+        public IReferenceFrameWorld World {
+            get => _handedWorld;
+            set {
+                _handedWorld = value;
+
+                if (isActiveAndEnabled)
+                    _resolvedWorld = ResolveWorld();
+            }
+        }
 
         private void OnEnable() {
             _body = GetComponent<Rigidbody>();
             _stepsSinceProbe = 0;
+            _missingWorldReported = false;
             _resolvedWorld = ResolveWorld();
-
-            if (_resolvedWorld == null)
-                Log.Error($"[ReferenceFrameRider] '{name}' found no reference frame world and records no binds.",
-                    this);
         }
 
         private void FixedUpdate() {
@@ -72,6 +79,9 @@ namespace Spellbound.Character.Body {
                 (skipKinematic && _body.isKinematic) || (skipSleeping && !binding.IsBound && _body.IsSleeping());
 
         private void Probe(double time) {
+            if (_resolvedWorld == null)
+                ReportMissingWorld();
+
             var floor = FindFloorBelow();
 
             if (floor == null)
@@ -129,9 +139,17 @@ namespace Spellbound.Character.Body {
             return null;
         }
 
+        private void ReportMissingWorld() {
+            if (_missingWorldReported)
+                return;
+
+            _missingWorldReported = true;
+            Log.Error($"[ReferenceFrameRider] '{name}' found no reference frame world and records no binds.", this);
+        }
+
         private IReferenceFrameWorld ResolveWorld() {
-            if (World != null)
-                return World;
+            if (_handedWorld != null)
+                return _handedWorld;
 
             if (world != null && world is IReferenceFrameWorld serialized)
                 return serialized;

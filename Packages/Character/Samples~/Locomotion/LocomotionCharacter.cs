@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Spellbound.Character.Samples.Locomotion {
     [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(ReferenceFrameRider))]
-    [DefaultExecutionOrder(-60)]
+    [DefaultExecutionOrder(-40)]
     public sealed class LocomotionCharacter : MonoBehaviour, IPlayableCharacter {
         [SerializeField, Tooltip("The state assets this character can be handed. They fill the character's own " +
                                  "state registry.")]

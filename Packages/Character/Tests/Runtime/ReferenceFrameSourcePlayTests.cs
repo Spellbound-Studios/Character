@@ -106,6 +106,46 @@ namespace Spellbound.Character.Tests {
         }
 
         [UnityTest]
+        public IEnumerator RigidbodySource_KinematicBodyMovedThroughMove_ReportsTheCommandedVelocityInTheSameStep() {
+            var platform = CreateChild("Platform");
+            var body = CreateKinematicBody(platform);
+            var source = platform.AddComponent<RigidbodyReferenceFrameSource>();
+            var velocity = new Vector3(1f, 0f, 0f);
+            const float degreesPerSecond = 90f;
+            var spin = new Vector3(0f, degreesPerSecond * Mathf.Deg2Rad, 0f);
+
+            yield return new WaitForFixedUpdate();
+
+            var stepSeconds = Time.fixedDeltaTime;
+            var turn = Quaternion.AngleAxis(degreesPerSecond * stepSeconds, Vector3.up);
+            source.Move(new Pose(body.position + velocity * stepSeconds, turn * body.rotation));
+
+            AssertNear(velocity + Vector3.Cross(spin, Vector3.forward),
+                source.VelocityAt(body.position + Vector3.forward));
+            AssertNear(spin, source.AngularVelocity);
+            AssertNear(Vector3.zero, body.GetPointVelocity(body.position + Vector3.forward));
+        }
+
+        [UnityTest]
+        public IEnumerator RigidbodySource_KinematicBodyInAStepWithNoMove_ReportsTheBodysVelocity() {
+            var platform = CreateChild("Platform");
+            var body = CreateKinematicBody(platform);
+            var source = platform.AddComponent<RigidbodyReferenceFrameSource>();
+            var velocity = new Vector3(1f, 0f, 0f);
+
+            yield return new WaitForFixedUpdate();
+
+            source.Move(new Pose(body.position + velocity * Time.fixedDeltaTime, body.rotation));
+
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+
+            var point = body.position + Vector3.up;
+            AssertNear(body.GetPointVelocity(point), source.VelocityAt(point));
+            AssertNear(body.angularVelocity, source.AngularVelocity);
+        }
+
+        [UnityTest]
         public IEnumerator RigidbodySource_SpinningBody_ReportsItsAngularVelocity() {
             var platform = CreateChild("Spinner");
             var body = platform.AddComponent<Rigidbody>();
@@ -167,6 +207,14 @@ namespace Spellbound.Character.Tests {
             child.transform.SetParent(_worldObject.transform, false);
 
             return child;
+        }
+
+        private static Rigidbody CreateKinematicBody(GameObject platform) {
+            var body = platform.AddComponent<Rigidbody>();
+            body.isKinematic = true;
+            body.useGravity = false;
+
+            return body;
         }
 
         private GameObject CreateInactiveChild(string name) {

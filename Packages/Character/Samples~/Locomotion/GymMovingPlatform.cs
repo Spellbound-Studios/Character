@@ -1,8 +1,10 @@
 // Copyright (c) Spellbound Studios. All rights reserved.
 
+using Spellbound.Character.Body;
 using UnityEngine;
 
 namespace Spellbound.Character.Samples.Locomotion {
+    [DefaultExecutionOrder(-90)]
     [RequireComponent(typeof(Rigidbody))]
     public sealed class GymMovingPlatform : MonoBehaviour {
         [SerializeField, Tooltip("The first end of the platform's run, relative to where it starts.")]
@@ -15,6 +17,7 @@ namespace Spellbound.Character.Samples.Locomotion {
         private float speed = 1.5f;
 
         private Rigidbody _body;
+        private RigidbodyReferenceFrameSource _source;
         private Vector3 _origin;
         private bool _towardsSecond = true;
 
@@ -42,6 +45,15 @@ namespace Spellbound.Character.Samples.Locomotion {
             }
         }
 
+        private RigidbodyReferenceFrameSource Source {
+            get {
+                if (_source == null)
+                    _source = GetComponent<RigidbodyReferenceFrameSource>();
+
+                return _source;
+            }
+        }
+
         private void Awake() {
             Body.isKinematic = true;
             Body.useGravity = false;
@@ -56,7 +68,10 @@ namespace Spellbound.Character.Samples.Locomotion {
             if ((next - target).sqrMagnitude <= Vector3.kEpsilon * Vector3.kEpsilon)
                 _towardsSecond = !_towardsSecond;
 
-            Body.MovePosition(next);
+            if (Source != null)
+                Source.Move(new Pose(next, Body.rotation));
+            else
+                Body.MovePosition(next);
         }
     }
 }

@@ -43,11 +43,15 @@ namespace Spellbound.Character.Samples.Locomotion {
             var rigidbody = Body.Rigidbody;
             var up = Up;
             var planarVelocity = Vector3.ProjectOnPlane(rigidbody.linearVelocity, up);
-            var worldVelocity = Body.ReferenceFrame.WorldVelocity(direction * speed, rigidbody.position);
-            var targetVelocity = Vector3.ProjectOnPlane(worldVelocity, up);
-            var nextVelocity = Vector3.MoveTowards(planarVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+            var frameVelocity = Vector3.ProjectOnPlane(Body.ReferenceFrame.WorldVelocityAt(rigidbody.position), up);
+            var carriedVelocity = Body.ReferenceFrame.IsBound ? Locomotion.CarriedVelocity : Vector3.zero;
+            var relativeVelocity = planarVelocity - carriedVelocity;
+            var targetVelocity = Vector3.ProjectOnPlane(direction * speed, up);
+            var nextRelativeVelocity = Vector3.MoveTowards(
+                relativeVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
 
-            rigidbody.AddForce(nextVelocity - planarVelocity, ForceMode.VelocityChange);
+            Locomotion.CarriedVelocity = frameVelocity;
+            rigidbody.AddForce(frameVelocity + nextRelativeVelocity - planarVelocity, ForceMode.VelocityChange);
         }
 
         protected void TurnTowards(Vector3 direction, float turnSpeed) {

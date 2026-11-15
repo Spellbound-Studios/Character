@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Spellbound.Character.Body;
 using Spellbound.Core;
@@ -15,23 +16,27 @@ namespace Spellbound.Character.Tests {
         private const float BodyHeight = 0.5f;
         private const float LiftMetres = 5f;
         private const float StaticFloorOffset = 6f;
+        private const int ProbeSteps = 10;
 
         private static readonly Vector3 PlatformVelocity = new(1f, 0f, 0f);
         private static readonly Vector3 StaticFloorSize = new(4f, 0.2f, 4f);
 
         private GameObject _worldObject;
         private TestReferenceFrameWorld _world;
+        private GameObject _outsideTheWorld;
         private ObservationContext _observations;
 
         [SetUp]
         public void CreateWorld() {
             _worldObject = new GameObject("reference frame rider play world");
             _world = _worldObject.AddComponent<TestReferenceFrameWorld>();
+            _outsideTheWorld = new GameObject("outside the reference frame rider play world");
         }
 
         [TearDown]
         public void DestroyWorld() {
             Object.Destroy(_worldObject);
+            Object.Destroy(_outsideTheWorld);
             _observations?.Dispose();
             _observations = null;
         }
@@ -247,9 +252,44 @@ namespace Spellbound.Character.Tests {
             Assert.AreEqual(1L, BoundCount());
         }
 
-        private ReferenceFrameRider CreateRider(MovingPlatformFixture platform, float gap) {
+        [UnityTest]
+        public IEnumerator Rider_HandedItsWorldAfterEnable_RecordsItsBindAndLogsNoError() {
+            _observations = CoreKit.Observations.CreateContext("reference frame rider play observations");
+            _world.Observations = _observations;
+            var platform = MovingPlatformFixture.Create(_worldObject.transform, Vector3.zero, Vector3.zero);
+            var rider = CreateRider(platform, 0.05f, _outsideTheWorld.transform);
+            rider.GetComponent<Rigidbody>().useGravity = false;
+            rider.World = _world;
+
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+
+            Assert.IsTrue(rider.Binding.IsBound);
+            Assert.AreEqual(1L, BoundCount());
+            LogAssert.NoUnexpectedReceived();
+        }
+
+        [UnityTest]
+        public IEnumerator Rider_NeverHandedAWorld_LogsTheErrorOnceAtItsFirstProbe() {
+            var platform = MovingPlatformFixture.Create(_worldObject.transform, Vector3.zero, Vector3.zero);
+            var rider = CreateRider(platform, 0.05f, _outsideTheWorld.transform);
+            rider.GetComponent<Rigidbody>().useGravity = false;
+
+            LogAssert.NoUnexpectedReceived();
+            LogAssert.Expect(LogType.Error, new Regex("'Rider' found no reference frame world"));
+
+            for (var step = 0; step < ProbeSteps; step++)
+                yield return new WaitForFixedUpdate();
+
+            LogAssert.NoUnexpectedReceived();
+        }
+
+        private ReferenceFrameRider CreateRider(MovingPlatformFixture platform, float gap) =>
+                CreateRider(platform, gap, _worldObject.transform);
+
+        private ReferenceFrameRider CreateRider(MovingPlatformFixture platform, float gap, Transform parent) {
             var rider = new GameObject("Rider");
-            rider.transform.SetParent(_worldObject.transform, false);
+            rider.transform.SetParent(parent, false);
             var platformPosition = platform.Body.position;
             var height = platform.TopHeight + BodyHeight * 0.5f + gap;
             rider.transform.position = new Vector3(platformPosition.x, height, platformPosition.z);

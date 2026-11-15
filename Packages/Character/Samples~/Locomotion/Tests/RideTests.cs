@@ -12,9 +12,11 @@ namespace Spellbound.Character.Samples.Locomotion.Tests {
         private const int SettleSteps = 40;
         private const int RideSteps = 100;
         private const int CrossingSteps = 200;
+        private const int AcrossTheTurnSteps = 85;
 
         private static readonly Vector3 PlatformPosition = new(0f, 1f, 0f);
         private static readonly Vector3 PlatformRun = new(12f, 0f, 0f);
+        private static readonly Vector3 ReversingRun = new(3f, 0f, 0f);
 
         private TestGym _gym;
         private ScriptedLocomotionInput _input;
@@ -46,6 +48,26 @@ namespace Spellbound.Character.Samples.Locomotion.Tests {
             Assert.Greater(platformTravel.magnitude, 2f, "The platform did not move.");
             Assert.LessOrEqual(Vector3.Distance(characterTravel, platformTravel), FollowTolerance,
                 $"The character travelled {characterTravel} while the platform travelled {platformTravel}.");
+        }
+
+        [UnityTest]
+        public IEnumerator Character_StandingOnAPlatformThatReverses_KeepsItsSpotWithinTwoCentimetres() {
+            var platform = _gym.CreatePlatform(PlatformPosition, ReversingRun);
+            var character = _gym.CreateCharacter(_input, StandingPoint(0f));
+
+            yield return SettleOn(character);
+
+            var offsetBefore = Planar(character.Body.Rigidbody.position - platform.Body.position);
+
+            yield return TestGym.WaitFixedSteps(AcrossTheTurnSteps);
+
+            var offsetAfter = Planar(character.Body.Rigidbody.position - platform.Body.position);
+
+            Assert.Less(platform.Body.position.x, PlatformPosition.x + ReversingRun.x - 0.3f,
+                $"The platform did not turn back, it stands at {platform.Body.position.x}.");
+            Assert.LessOrEqual(Vector3.Distance(offsetBefore, offsetAfter), FollowTolerance,
+                $"The character stood at {offsetBefore:F4} on the platform before the turn and at " +
+                $"{offsetAfter:F4} after it, {Vector3.Distance(offsetBefore, offsetAfter):F4} apart.");
         }
 
         [UnityTest]
