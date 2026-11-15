@@ -14,8 +14,10 @@ namespace Spellbound.Character.Tests {
         private const float Tolerance = 0.05f;
         private const float BodyHeight = 0.5f;
         private const float LiftMetres = 5f;
+        private const float StaticFloorOffset = 6f;
 
         private static readonly Vector3 PlatformVelocity = new(1f, 0f, 0f);
+        private static readonly Vector3 StaticFloorSize = new(4f, 0.2f, 4f);
 
         private GameObject _worldObject;
         private TestReferenceFrameWorld _world;
@@ -192,6 +194,59 @@ namespace Spellbound.Character.Tests {
             Assert.IsTrue(rider.Binding.IsBound);
         }
 
+        [UnityTest]
+        public IEnumerator Rider_SteppingOffOntoAStaticFloor_ReleasesOnTheNextProbe() {
+            _observations = CoreKit.Observations.CreateContext("reference frame rider play observations");
+            _world.Observations = _observations;
+            var platform = MovingPlatformFixture.Create(_worldObject.transform, Vector3.zero, PlatformVelocity);
+            var floor = CreateStaticFloor(new Vector3(StaticFloorOffset, 0f, 0f), platform.TopHeight);
+            var rider = CreateRider(platform, 0f);
+            var body = rider.GetComponent<Rigidbody>();
+
+            for (var step = 0; step < 3; step++)
+                yield return new WaitForFixedUpdate();
+
+            Assert.IsTrue(rider.Binding.IsBound);
+            var floorPosition = floor.transform.position;
+            body.position = new Vector3(floorPosition.x, body.position.y, floorPosition.z);
+            body.linearVelocity = Vector3.zero;
+
+            yield return new WaitForFixedUpdate();
+
+            Assert.IsFalse(rider.Binding.IsBound, "still bound one step after stepping onto a static floor");
+            Assert.AreEqual(1L, BoundCount());
+        }
+
+        [UnityTest]
+        public IEnumerator Rider_LeavingThePlatformIntoTheAir_StaysBoundThroughTheHoldThenReleases() {
+            _observations = CoreKit.Observations.CreateContext("reference frame rider play observations");
+            _world.Observations = _observations;
+            var platform = MovingPlatformFixture.Create(_worldObject.transform, Vector3.zero, PlatformVelocity);
+            var rider = CreateRider(platform, 0f);
+            var body = rider.GetComponent<Rigidbody>();
+            body.useGravity = false;
+
+            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
+
+            Assert.IsTrue(rider.Binding.IsBound);
+            body.position += Vector3.up * LiftMetres;
+            body.linearVelocity = Vector3.zero;
+            var holdSteps = Mathf.RoundToInt((float)rider.Binding.HoldSeconds / Time.fixedDeltaTime);
+
+            for (var step = 0; step < holdSteps - 1; step++) {
+                yield return new WaitForFixedUpdate();
+
+                Assert.IsTrue(rider.Binding.IsBound, $"released after {step + 1} of {holdSteps} hold steps");
+            }
+
+            for (var step = 0; step < 3; step++)
+                yield return new WaitForFixedUpdate();
+
+            Assert.IsFalse(rider.Binding.IsBound);
+            Assert.AreEqual(1L, BoundCount());
+        }
+
         private ReferenceFrameRider CreateRider(MovingPlatformFixture platform, float gap) {
             var rider = new GameObject("Rider");
             rider.transform.SetParent(_worldObject.transform, false);
@@ -202,6 +257,15 @@ namespace Spellbound.Character.Tests {
             rider.AddComponent<Rigidbody>();
 
             return rider.AddComponent<ReferenceFrameRider>();
+        }
+
+        private GameObject CreateStaticFloor(Vector3 position, float topHeight) {
+            var floor = new GameObject("Static floor");
+            floor.transform.SetParent(_worldObject.transform, false);
+            floor.transform.position = new Vector3(position.x, topHeight - StaticFloorSize.y * 0.5f, position.z);
+            floor.AddComponent<BoxCollider>().size = StaticFloorSize;
+
+            return floor;
         }
 
         private long BoundCount() =>

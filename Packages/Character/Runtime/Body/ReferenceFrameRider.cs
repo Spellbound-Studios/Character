@@ -72,10 +72,18 @@ namespace Spellbound.Character.Body {
                 (skipKinematic && _body.isKinematic) || (skipSleeping && !binding.IsBound && _body.IsSleeping());
 
         private void Probe(double time) {
-            var source = FindSourceBelow();
+            var floor = FindFloorBelow();
 
-            if (source == null)
+            if (floor == null)
                 return;
+
+            var source = RegisteredSourceAbove(floor.transform);
+
+            if (source == null) {
+                binding.Release();
+
+                return;
+            }
 
             if (ReferenceEquals(source, binding.BoundFrame)) {
                 binding.Sight(time);
@@ -90,7 +98,7 @@ namespace Spellbound.Character.Body {
                     _resolvedWorld.CurrentTick, EntityId.ToULong(GetEntityId()));
         }
 
-        private ReferenceFrameSource FindSourceBelow() {
+        private Collider FindFloorBelow() {
             var origin = _body.position + Vector3.up * probeLift;
             var layers = settings != null ? settings.rideableLayers : probeLayers;
             var count = gameObject.scene.GetPhysicsScene().Raycast(origin, Vector3.down, _hits, probeLift + probeMetres,
@@ -109,7 +117,7 @@ namespace Spellbound.Character.Body {
                 nearestDistance = hit.distance;
             }
 
-            return nearest != null ? RegisteredSourceAbove(nearest.transform) : null;
+            return nearest;
         }
 
         private static ReferenceFrameSource RegisteredSourceAbove(Transform start) {
