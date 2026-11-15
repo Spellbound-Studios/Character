@@ -12,6 +12,12 @@ namespace Spellbound.Character.Body {
         public void Validate(ValidationReport report) {
             if (report == null)
                 throw new ArgumentNullException(nameof(report));
+
+            if (rideableLayers.value == 0) {
+                report.Warning("character.rideable-layers-empty",
+                    "No layer is rideable, so no rider binds to anything.", nameof(rideableLayers),
+                    "Set it to the layers of the moving things riders stand on.");
+            }
         }
     }
 }

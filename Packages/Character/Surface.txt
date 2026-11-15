@@ -169,6 +169,10 @@ member Spellbound.Character.Cinemachine.ClampedFollowDamping.new()
 member Spellbound.Character.Cinemachine.ThirdPersonFollowZoom.Distance : Unity.Cinemachine.InputAxis
 member Spellbound.Character.Cinemachine.ThirdPersonFollowZoom.new()
 member Spellbound.Character.Editor.BuildRagdollWindow.new()
+member Spellbound.Character.Editor.RideableColliderCheck.Check(Spellbound.Character.Body.RidingSettings, Spellbound.Core.Authoring.ValidationReport) : System.Void
+member Spellbound.Character.Editor.RideableColliderCheck.Name : const System.String = "character.rideable-collider-without-frame"
+member Spellbound.Character.Editor.RideableColliderCheck.PreviewLines(Spellbound.Character.Body.RidingSettings) : System.Collections.Generic.IReadOnlyList<System.String>
+member Spellbound.Character.Editor.RideableColliderCheck.new()
 member Spellbound.Character.Editor.RigKindMapping.ToAnimationType(Spellbound.Character.Rig.RigKind) : static UnityEditor.ModelImporterAnimationType
 member Spellbound.Character.Editor.RigKindMapping.TryFromAnimationType(UnityEditor.ModelImporterAnimationType, out Spellbound.Character.Rig.RigKind) : static System.Boolean
 member Spellbound.Character.Presentation.MeshBoundsMath.FindSharedMeshBounds(UnityEngine.GameObject) : static System.Nullable<UnityEngine.Bounds>
@@ -378,6 +382,7 @@ type Spellbound.Character.Cinemachine.CharacterCinemachineKit : static class
 type Spellbound.Character.Cinemachine.ClampedFollowDamping : class : Unity.Cinemachine.CinemachineExtension
 type Spellbound.Character.Cinemachine.ThirdPersonFollowZoom : class : UnityEngine.MonoBehaviour, Unity.Cinemachine.IInputAxisOwner
 type Spellbound.Character.Editor.BuildRagdollWindow : sealed class : UnityEditor.EditorWindow
+type Spellbound.Character.Editor.RideableColliderCheck : sealed class : Spellbound.Core.Authoring.Editor.IDefinitionCheck<Spellbound.Character.Body.RidingSettings>
 type Spellbound.Character.Editor.RigKindMapping : static class
 type Spellbound.Character.Editor.SnapToGroundMenu : static class
 type Spellbound.Character.Presentation.Editor.MeasureCapsuleFromMeshMenu : static class

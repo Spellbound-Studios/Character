@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - Reference frame sources register into their world's directory: `ReferenceFrameSource` registers on enable and unregisters on disable, finding its world in `World`, then its serialized world component, then its parents, and logs an error and stays unregistered when it has no world or its id is refused. `ReferenceFrameSource.Id` is settable before enable, and a zero id becomes `ReferenceFrameIds.FromHierarchyPath(transform)`; setting `World` or `Id` while registered throws. `RigidbodyReferenceFrameSource` reads its rigidbody and `TransformReferenceFrameSource` gives finite-difference velocities over the fixed step.
+- `RideableColliderCheck`, registered as `character.rideable-collider-without-frame` on `RidingSettings`, warns for every collider in a loaded scene that is on a rideable layer, is not a trigger and has no `ReferenceFrameSource` above it. `RidingSettings.Validate` warns `character.rideable-layers-empty` when no layer is rideable.
 
 ## [0.0.0] - 2026-11-12
 
