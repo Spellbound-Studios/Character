@@ -34,5 +34,7 @@ namespace Spellbound.Character.StateMachine {
         public Vector3 DesiredMove { get; set; }
 
         public double ElapsedFixedTime { get; set; }
+
+        public MotionClaims Motion { get; } = new();
     }
 }

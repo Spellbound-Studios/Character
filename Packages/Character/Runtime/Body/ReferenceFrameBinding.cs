@@ -60,5 +60,13 @@ namespace Spellbound.Character.Body {
 
             return BoundFrame.VelocityAt(point);
         }
+
+        public Quaternion Turn(Quaternion bodyRotation, double stepSeconds) {
+            throw new NotImplementedException();
+        }
+
+        public Vector3 WorldVelocity(Vector3 relative, Vector3 point) {
+            throw new NotImplementedException();
+        }
     }
 }
