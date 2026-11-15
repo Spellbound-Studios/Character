@@ -77,11 +77,12 @@ member Spellbound.Character.Body.ReferenceFrameBinding.Update(System.Double) : S
 member Spellbound.Character.Body.ReferenceFrameBinding.WorldVelocity(UnityEngine.Vector3, UnityEngine.Vector3) : UnityEngine.Vector3
 member Spellbound.Character.Body.ReferenceFrameBinding.WorldVelocityAt(UnityEngine.Vector3) : UnityEngine.Vector3
 member Spellbound.Character.Body.ReferenceFrameBinding.new()
+member Spellbound.Character.Body.ReferenceFrameIds.FromHierarchyPath(UnityEngine.Transform) : static Spellbound.Core.ReferenceFrames.ReferenceFrameId
 member Spellbound.Character.Body.ReferenceFrameRider.Binding : Spellbound.Character.Body.ReferenceFrameBinding { get; }
 member Spellbound.Character.Body.ReferenceFrameRider.World : Spellbound.Character.Body.IReferenceFrameWorld { get; set; }
 member Spellbound.Character.Body.ReferenceFrameRider.new()
 member Spellbound.Character.Body.ReferenceFrameSource.AngularVelocity : abstract UnityEngine.Vector3 { get; }
-member Spellbound.Character.Body.ReferenceFrameSource.Id : Spellbound.Core.ReferenceFrames.ReferenceFrameId { get; }
+member Spellbound.Character.Body.ReferenceFrameSource.Id : Spellbound.Core.ReferenceFrames.ReferenceFrameId { get; set; }
 member Spellbound.Character.Body.ReferenceFrameSource.IsRegistered : System.Boolean { get; }
 member Spellbound.Character.Body.ReferenceFrameSource.OnDisable() : virtual System.Void
 member Spellbound.Character.Body.ReferenceFrameSource.OnEnable() : virtual System.Void
@@ -101,6 +102,10 @@ member Spellbound.Character.Body.ResizableCapsuleCollider.new()
 member Spellbound.Character.Body.RidingSettings.Validate(Spellbound.Core.Authoring.ValidationReport) : System.Void
 member Spellbound.Character.Body.RidingSettings.new()
 member Spellbound.Character.Body.RidingSettings.rideableLayers : UnityEngine.LayerMask
+member Spellbound.Character.Body.RigidbodyReferenceFrameSource.AngularVelocity : override UnityEngine.Vector3 { get; }
+member Spellbound.Character.Body.RigidbodyReferenceFrameSource.VelocityAt(UnityEngine.Vector3) : override UnityEngine.Vector3
+member Spellbound.Character.Body.RigidbodyReferenceFrameSource.WorldPose : override UnityEngine.Pose { get; }
+member Spellbound.Character.Body.RigidbodyReferenceFrameSource.new()
 member Spellbound.Character.Body.RotationMath.GetRotationAngleDifference(UnityEngine.Quaternion, UnityEngine.Vector3, UnityEngine.Vector3) : static System.Single
 member Spellbound.Character.Body.RotationMath.HandleCharacterRotation(UnityEngine.Rigidbody, UnityEngine.Vector3, System.Single, System.Single, System.Single) : static System.Void
 member Spellbound.Character.Body.RotationMath.HandleCharacterRotation(UnityEngine.Rigidbody, UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single, System.Single) : static System.Void
@@ -115,6 +120,11 @@ member Spellbound.Character.Body.SlopeMath.GetSlopeReachFactor(System.Single, Sy
 member Spellbound.Character.Body.SlopeMath.ProjectOntoCrease(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Vector3) : static UnityEngine.Vector3
 member Spellbound.Character.Body.SupportProbeMath.CheckOverlapSphere(UnityEngine.Vector3, System.Single, UnityEngine.LayerMask) : static System.Boolean
 member Spellbound.Character.Body.SupportProbeMath.ProbeGround(UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single, UnityEngine.LayerMask) : static Spellbound.Character.Body.GroundProbeResult
+member Spellbound.Character.Body.TransformReferenceFrameSource.AngularVelocity : override UnityEngine.Vector3 { get; }
+member Spellbound.Character.Body.TransformReferenceFrameSource.OnEnable() : override System.Void
+member Spellbound.Character.Body.TransformReferenceFrameSource.VelocityAt(UnityEngine.Vector3) : override UnityEngine.Vector3
+member Spellbound.Character.Body.TransformReferenceFrameSource.WorldPose : override UnityEngine.Pose { get; }
+member Spellbound.Character.Body.TransformReferenceFrameSource.new()
 member Spellbound.Character.Body.VelocityMath.ApplyHorizontalMovementForce(UnityEngine.Rigidbody, UnityEngine.Vector3, System.Single, UnityEngine.ForceMode) : static System.Void
 member Spellbound.Character.Body.VelocityMath.GetCurrentSpeed(UnityEngine.Rigidbody) : static System.Single
 member Spellbound.Character.Body.VelocityMath.GetHorizontalSpeed(UnityEngine.Rigidbody, UnityEngine.Vector3) : static System.Single
@@ -346,13 +356,16 @@ type Spellbound.Character.Body.MotionClaim : readonly struct
 type Spellbound.Character.Body.MotionClaims : sealed class
 type Spellbound.Character.Body.PlayableCharacters : static class
 type Spellbound.Character.Body.ReferenceFrameBinding : sealed class
+type Spellbound.Character.Body.ReferenceFrameIds : static class
 type Spellbound.Character.Body.ReferenceFrameRider : sealed class : UnityEngine.MonoBehaviour
 type Spellbound.Character.Body.ReferenceFrameSource : abstract class : UnityEngine.MonoBehaviour, Spellbound.Core.ReferenceFrames.IReferenceFrame
 type Spellbound.Character.Body.ResizableCapsuleCollider : class
 type Spellbound.Character.Body.RidingSettings : sealed class : UnityEngine.ScriptableObject, Spellbound.Core.Authoring.IAuthoredDefinition
+type Spellbound.Character.Body.RigidbodyReferenceFrameSource : sealed class : Spellbound.Character.Body.ReferenceFrameSource
 type Spellbound.Character.Body.RotationMath : static class
 type Spellbound.Character.Body.SlopeMath : static class
 type Spellbound.Character.Body.SupportProbeMath : static class
+type Spellbound.Character.Body.TransformReferenceFrameSource : sealed class : Spellbound.Character.Body.ReferenceFrameSource
 type Spellbound.Character.Body.VelocityMath : static class
 type Spellbound.Character.CharacterKit : static class
 type Spellbound.Character.CharacterKit.Body : static class
