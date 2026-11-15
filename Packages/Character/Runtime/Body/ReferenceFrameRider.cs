@@ -55,6 +55,8 @@ namespace Spellbound.Character.Body {
             binding.Update(time);
         }
 
+        internal void ProbeOnce() => Probe(Time.fixedTimeAsDouble);
+
         private bool ProbeDue() {
             _stepsSinceProbe++;
 

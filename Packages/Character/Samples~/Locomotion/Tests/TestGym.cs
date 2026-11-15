@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spellbound.Character.Body;
 using Spellbound.StateMachine;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -11,7 +12,16 @@ namespace Spellbound.Character.Samples.Locomotion.Tests {
     public sealed class TestGym : IDisposable {
         private readonly List<Object> _created = new();
 
+        public static readonly Vector3 PlatformSize = new(4f, 0.2f, 4f);
+
         public TestGym() {
+            var worldObject = new GameObject("test gym world");
+            worldObject.SetActive(false);
+            _created.Add(worldObject);
+            World = worldObject.AddComponent<GymWorld>();
+            World.ContextName = "test gym";
+            worldObject.SetActive(true);
+
             Ground = GameObject.CreatePrimitive(PrimitiveType.Cube);
             Ground.name = "ground";
             Ground.transform.position = new Vector3(0f, -0.5f, 0f);
@@ -21,13 +31,36 @@ namespace Spellbound.Character.Samples.Locomotion.Tests {
 
         public GameObject Ground { get; }
 
-        public LocomotionCharacter CreateCharacter(ILocomotionInput input) => Build(null, input);
+        public GymWorld World { get; }
+
+        public LocomotionCharacter CreateCharacter(ILocomotionInput input) =>
+                Build(null, input, new Vector3(0f, 0.05f, 0f));
+
+        public LocomotionCharacter CreateCharacter(ILocomotionInput input, Vector3 position) =>
+                Build(null, input, position);
+
+        public GymMovingPlatform CreatePlatform(Vector3 position, Vector3 secondPoint) {
+            var platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            platform.SetActive(false);
+            platform.name = "moving platform";
+            _created.Add(platform);
+            platform.transform.position = position;
+            platform.transform.localScale = PlatformSize;
+            platform.AddComponent<Rigidbody>().isKinematic = true;
+            var moving = platform.AddComponent<GymMovingPlatform>();
+            moving.SecondPoint = secondPoint;
+            platform.AddComponent<RigidbodyReferenceFrameSource>().World = World;
+            platform.SetActive(true);
+
+            return moving;
+        }
 
         public LocomotionCharacter CreateCharacter<TInput>() where TInput : Component, ILocomotionInput =>
-                Build(typeof(TInput), null);
+                Build(typeof(TInput), null, new Vector3(0f, 0.05f, 0f));
 
         public LocomotionCharacter CreateCharacterFromPrefab(LocomotionCharacter prefab, ILocomotionInput input) {
-            var character = Object.Instantiate(prefab, new Vector3(0f, 0.05f, 0f), Quaternion.identity);
+            var character = Object.Instantiate(prefab, new Vector3(0f, 0.05f, 0f), Quaternion.identity,
+                World.transform);
             _created.Add(character.gameObject);
             character.LocomotionInput = input;
 
@@ -73,16 +106,17 @@ namespace Spellbound.Character.Samples.Locomotion.Tests {
             _created.Clear();
         }
 
-        private LocomotionCharacter Build(Type inputComponent, ILocomotionInput input) {
+        private LocomotionCharacter Build(Type inputComponent, ILocomotionInput input, Vector3 position) {
             var body = new GameObject("character");
             body.SetActive(false);
-            body.transform.position = new Vector3(0f, 0.05f, 0f);
+            body.transform.position = position;
             _created.Add(body);
 
             if (inputComponent != null)
                 body.AddComponent(inputComponent);
 
             var character = body.AddComponent<LocomotionCharacter>();
+            character.World = World;
             character.LocomotionInput = input;
             character.Configuration = new StateMachineConfiguration<LocomotionStateKey>(
                 LocomotionStateKey.Fall,

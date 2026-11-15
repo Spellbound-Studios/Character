@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8058677560212103391}
   - component: {fileID: 787336104198740652}
   - component: {fileID: 4032904612442358553}
+  - component: {fileID: 3376700114888328010}
   m_Layer: 0
   m_Name: LocomotionCharacter
   m_TagString: Untagged
@@ -151,13 +152,36 @@ MonoBehaviour:
       <WallProbeDistance>k__BackingField: 0.35
       <CeilingClearance>k__BackingField: 0.15
       <StepHeightPercentage>k__BackingField: 0.25
-  referenceFrame:
-    holdSeconds: 0.5
+  world: {fileID: 0}
   animator: {fileID: 1037269542431733373}
   moveReference: {fileID: 0}
   supportLayers:
     serializedVersion: 2
     m_Bits: 4294967291
+--- !u!114 &3376700114888328010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358326698747160760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d690a3bef0888d349ae19b1300342937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Spellbound.Character.Body::Spellbound.Character.Body.ReferenceFrameRider
+  probeStride: 1
+  probeLift: 0.25
+  probeMetres: 1
+  probeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  skipSleeping: 1
+  skipKinematic: 1
+  settings: {fileID: 0}
+  world: {fileID: 0}
+  binding:
+    holdSeconds: 0.5
 --- !u!1001 &6849845904220425196
 PrefabInstance:
   m_ObjectHideFlags: 0
