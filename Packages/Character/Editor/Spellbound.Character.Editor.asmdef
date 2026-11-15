@@ -1,7 +1,7 @@
 {
   "name": "Spellbound.Character.Editor",
   "rootNamespace": "Spellbound.Character.Editor",
-  "references": ["Spellbound.Character", "Spellbound.Character.Rig"],
+  "references": ["Spellbound.Character", "Spellbound.Character.Body", "Spellbound.Character.Rig", "Spellbound.Core", "Spellbound.Core.Editor"],
   "includePlatforms": ["Editor"],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

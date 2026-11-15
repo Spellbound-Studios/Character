@@ -7,7 +7,8 @@ using Spellbound.StateMachine;
 using UnityEngine;
 
 namespace Spellbound.Character.Samples.Locomotion {
-    [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
+    [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(ReferenceFrameRider))]
+    [DefaultExecutionOrder(-40)]
     public sealed class LocomotionCharacter : MonoBehaviour, IPlayableCharacter {
         [SerializeField, Tooltip("The state assets this character can be handed. They fill the character's own " +
                                  "state registry.")]
@@ -18,7 +19,9 @@ namespace Spellbound.Character.Samples.Locomotion {
 
         [SerializeField] private ResizableCapsuleCollider capsule = new();
 
-        [SerializeField] private ReferenceFrameBinding referenceFrame = new();
+        [SerializeField, Tooltip("The world whose moving frames this character rides. Empty = the rider looks for " +
+                                 "one among the character's parents.")]
+        private GymWorld world;
 
         [SerializeField, Tooltip("The model's Animator. Empty = no animation.")]
         private Animator animator;
@@ -50,6 +53,11 @@ namespace Spellbound.Character.Samples.Locomotion {
             set => configuration = value;
         }
 
+        public GymWorld World {
+            get => world;
+            set => world = value;
+        }
+
         public Transform MoveReference {
             get => moveReference;
             set => moveReference = value;
@@ -59,6 +67,11 @@ namespace Spellbound.Character.Samples.Locomotion {
             var body = GetComponent<Rigidbody>();
             body.freezeRotation = true;
 
+            var rider = GetComponent<ReferenceFrameRider>();
+
+            if (world != null)
+                rider.World = world;
+
             capsule.Initialize(gameObject, null);
             capsule.CalculateCapsuleColliderDimensions();
 
@@ -66,7 +79,7 @@ namespace Spellbound.Character.Samples.Locomotion {
                 LocomotionInput = input;
 
             var animation = animator != null ? new AnimatorAnimationController(animator) : null;
-            _context = new LocomotionContext(transform, body, capsule, referenceFrame, animation, ChangeState);
+            _context = new LocomotionContext(transform, body, capsule, rider.Binding, animation, ChangeState);
 
             Registry = states != null ? new StateRegistry(states) : new StateRegistry();
             _machine = CharacterStateMachineKit.Create(_context, configuration);
@@ -90,7 +103,6 @@ namespace Spellbound.Character.Samples.Locomotion {
 
         private void FixedUpdate() {
             _context.ElapsedFixedTime = Time.fixedTimeAsDouble;
-            referenceFrame.Update(_context.ElapsedFixedTime);
             _context.Support = ProbeSupport();
             _machine.FixedUpdateStateMachine();
             _context.JumpRequested = false;

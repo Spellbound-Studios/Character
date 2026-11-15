@@ -24,6 +24,8 @@ namespace Spellbound.Character.Samples.Locomotion {
 
         public bool JumpRequested { get; set; }
 
+        public Vector3 CarriedVelocity { get; set; }
+
         public void ChangeState(LocomotionStateKey slot) => _changeState(slot);
     }
 }

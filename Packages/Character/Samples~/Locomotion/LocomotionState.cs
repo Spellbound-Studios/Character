@@ -17,7 +17,14 @@ namespace Spellbound.Character.Samples.Locomotion {
 
         protected Vector3 Up => Body.Transform.up;
 
-        protected float PlanarSpeed => VelocityMath.GetHorizontalSpeed(Body.Rigidbody, Up);
+        protected float PlanarSpeed {
+            get {
+                var rigidbody = Body.Rigidbody;
+                var relative = rigidbody.linearVelocity - Body.ReferenceFrame.WorldVelocityAt(rigidbody.position);
+
+                return Vector3.ProjectOnPlane(relative, Up).magnitude;
+            }
+        }
 
         protected float VerticalSpeed => VelocityMath.GetVerticalSpeed(Body.Rigidbody, Up);
 
@@ -36,18 +43,23 @@ namespace Spellbound.Character.Samples.Locomotion {
             var rigidbody = Body.Rigidbody;
             var up = Up;
             var planarVelocity = Vector3.ProjectOnPlane(rigidbody.linearVelocity, up);
-            var frameVelocity = Body.ReferenceFrame.WorldVelocityAt(rigidbody.position);
-            var targetVelocity = Vector3.ProjectOnPlane(direction * speed + frameVelocity, up);
-            var nextVelocity = Vector3.MoveTowards(planarVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+            var frameVelocity = Vector3.ProjectOnPlane(Body.ReferenceFrame.WorldVelocityAt(rigidbody.position), up);
+            var carriedVelocity = Body.ReferenceFrame.IsBound ? Locomotion.CarriedVelocity : Vector3.zero;
+            var relativeVelocity = planarVelocity - carriedVelocity;
+            var targetVelocity = Vector3.ProjectOnPlane(direction * speed, up);
+            var nextRelativeVelocity = Vector3.MoveTowards(
+                relativeVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
 
-            rigidbody.AddForce(nextVelocity - planarVelocity, ForceMode.VelocityChange);
+            Locomotion.CarriedVelocity = frameVelocity;
+            rigidbody.AddForce(frameVelocity + nextRelativeVelocity - planarVelocity, ForceMode.VelocityChange);
         }
 
         protected void TurnTowards(Vector3 direction, float turnSpeed) {
             var rigidbody = Body.Rigidbody;
             var up = Up;
+            var carried = Body.ReferenceFrame.Turn(rigidbody.rotation, Time.fixedDeltaTime);
             var rotation = RotationMath.RotateTowardsDirection(
-                rigidbody.rotation, Vector3.ProjectOnPlane(direction, up), up, turnSpeed, Time.fixedDeltaTime);
+                carried, Vector3.ProjectOnPlane(direction, up), up, turnSpeed, Time.fixedDeltaTime);
 
             rigidbody.MoveRotation(rotation);
         }

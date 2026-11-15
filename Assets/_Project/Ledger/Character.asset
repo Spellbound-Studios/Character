@@ -12,15 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962a194318bb7b84187df0fb809d7cf3, type: 3}
   m_Name: Character
   m_EditorClassIdentifier: Spellbound.PackageCheck.Editor::Spellbound.PackageCheck.PackageLedger
-  waivers:
-  - rule: P1
-    revision: 1
-    subjects:
-    - package.json
-    reason: Observations under character are step 29 (R3a); until then the package
-      declares none.
-    endsAt: 2.0.0
-    handle: pipeline
-    grouped: 0
+  waivers: []
   answers: []
   gates: []
