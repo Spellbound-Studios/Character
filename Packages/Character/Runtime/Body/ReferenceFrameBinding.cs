@@ -62,11 +62,18 @@ namespace Spellbound.Character.Body {
         }
 
         public Quaternion Turn(Quaternion bodyRotation, double stepSeconds) {
-            throw new NotImplementedException();
+            if (!IsBound || double.IsNaN(stepSeconds) || double.IsInfinity(stepSeconds) || stepSeconds < 0.0)
+                return bodyRotation;
+
+            var angularVelocity = BoundFrame.AngularVelocity;
+            var radiansPerSecond = angularVelocity.magnitude;
+            if (radiansPerSecond <= Vector3.kEpsilon)
+                return bodyRotation;
+
+            var degrees = (float)(radiansPerSecond * stepSeconds * Mathf.Rad2Deg);
+            return Quaternion.AngleAxis(degrees, angularVelocity / radiansPerSecond) * bodyRotation;
         }
 
-        public Vector3 WorldVelocity(Vector3 relative, Vector3 point) {
-            throw new NotImplementedException();
-        }
+        public Vector3 WorldVelocity(Vector3 relative, Vector3 point) => relative + WorldVelocityAt(point);
     }
 }
