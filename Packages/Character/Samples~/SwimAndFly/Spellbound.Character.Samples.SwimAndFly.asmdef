@@ -1,0 +1,25 @@
+{
+  "name": "Spellbound.Character.Samples.SwimAndFly",
+  "rootNamespace": "Spellbound.Character.Samples.SwimAndFly",
+  "references": ["Spellbound.Core", "Spellbound.Character.Body", "Unity.InputSystem"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": ["SPELLBOUND_CORE", "SPELLBOUND_INPUTSYSTEM", "!UNITY_SERVER"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.unity.inputsystem",
+      "expression": "[1.0.0,2.0.0)",
+      "define": "SPELLBOUND_INPUTSYSTEM"
+    }
+  ],
+  "noEngineReferences": false
+}

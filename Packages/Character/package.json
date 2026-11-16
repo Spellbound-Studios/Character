@@ -14,6 +14,11 @@
       "displayName": "Locomotion",
       "description": "Walk, run, jump and fall over StateMachine, on a character that carries the playable marker.",
       "path": "Samples~/Locomotion"
+    },
+    {
+      "displayName": "Swim And Fly",
+      "description": "Swimming and flying as motion drivers over motion claims, with containment on the character and no StateMachine.",
+      "path": "Samples~/SwimAndFly"
     }
   ]
 }
