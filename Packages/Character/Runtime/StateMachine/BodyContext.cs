@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace Spellbound.Character.StateMachine {
     public class BodyContext {
+        private Vector3 _desiredMove;
+
         public BodyContext(
             Transform transform, Rigidbody rigidbody, ResizableCapsuleCollider capsule,
             ReferenceFrameBinding referenceFrame) {
@@ -31,7 +33,14 @@ namespace Spellbound.Character.StateMachine {
 
         public GroundProbeResult Support { get; set; } = GroundProbeResult.Miss;
 
-        public Vector3 DesiredMove { get; set; }
+        public IMoveSource MoveSource { get; set; }
+
+        public Vector3 DesiredMove {
+            get => MoveSource != null ? MoveSource.DesiredMove : _desiredMove;
+            set => _desiredMove = value;
+        }
+
+        public Vector3 DesiredUp => MoveSource != null ? MoveSource.DesiredUp : Vector3.up;
 
         public double ElapsedFixedTime { get; set; }
 

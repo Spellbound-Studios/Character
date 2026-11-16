@@ -3,13 +3,14 @@
 using Spellbound.Character.Body;
 using Spellbound.Character.Rig;
 using Spellbound.Character.StateMachine;
+using Spellbound.Core.ReferenceFrames;
 using Spellbound.StateMachine;
 using UnityEngine;
 
 namespace Spellbound.Character.Samples.Locomotion {
     [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(ReferenceFrameRider))]
     [DefaultExecutionOrder(-40)]
-    public sealed class LocomotionCharacter : MonoBehaviour, IPlayableCharacter {
+    public sealed class LocomotionCharacter : MonoBehaviour, IPlayableCharacter, IMoveSource {
         [SerializeField, Tooltip("The state assets this character can be handed. They fill the character's own " +
                                  "state registry.")]
         private StateCatalogue states;
@@ -34,8 +35,18 @@ namespace Spellbound.Character.Samples.Locomotion {
 
         private global::Spellbound.StateMachine.StateMachine<BodyContext, LocomotionStateKey> _machine;
         private LocomotionContext _context;
+        private IUpProvider _upProvider;
 
         public ILocomotionInput LocomotionInput { get; set; }
+
+        public IUpProvider UpProvider {
+            get => _upProvider ??= new ConstantUpProvider();
+            set => _upProvider = value;
+        }
+
+        public Vector3 DesiredMove { get; private set; }
+
+        public Vector3 DesiredUp => UpProvider.UpAt(transform.position);
 
         public IStateMachine Machine => _machine;
 
@@ -79,7 +90,9 @@ namespace Spellbound.Character.Samples.Locomotion {
                 LocomotionInput = input;
 
             var animation = animator != null ? new AnimatorAnimationController(animator) : null;
-            _context = new LocomotionContext(transform, body, capsule, rider.Binding, animation, ChangeState);
+            _context = new LocomotionContext(transform, body, capsule, rider.Binding, animation, ChangeState) {
+                MoveSource = this
+            };
 
             Registry = states != null ? new StateRegistry(states) : new StateRegistry();
             _machine = CharacterStateMachineKit.Create(_context, configuration);
@@ -87,14 +100,14 @@ namespace Spellbound.Character.Samples.Locomotion {
 
         private void Update() {
             if (LocomotionInput != null) {
-                _context.DesiredMove = ToWorld(LocomotionInput.Move);
+                DesiredMove = ToWorld(LocomotionInput.Move);
                 _context.RunRequested = LocomotionInput.Run;
 
                 if (LocomotionInput.JumpPressed)
                     _context.JumpRequested = true;
             }
             else {
-                _context.DesiredMove = Vector3.zero;
+                DesiredMove = Vector3.zero;
                 _context.RunRequested = false;
             }
 
