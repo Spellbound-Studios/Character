@@ -1,0 +1,25 @@
+{
+  "name": "Spellbound.Character.Samples.SwimAndFly.Tests",
+  "rootNamespace": "Spellbound.Character.Samples.SwimAndFly.Tests",
+  "references": ["Spellbound.Character.Samples.SwimAndFly", "Spellbound.Character.Body", "Spellbound.Core", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": ["SPELLBOUND_CORE", "UNITY_INCLUDE_TESTS", "SPELLBOUND_INPUTSYSTEM", "!UNITY_SERVER"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.unity.inputsystem",
+      "expression": "[1.0.0,2.0.0)",
+      "define": "SPELLBOUND_INPUTSYSTEM"
+    }
+  ],
+  "noEngineReferences": false
+}
