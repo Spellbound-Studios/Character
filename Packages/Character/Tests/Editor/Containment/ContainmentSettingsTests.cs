@@ -24,7 +24,7 @@ namespace Spellbound.Character.Editor.Tests {
         }
 
         [Test]
-        public void Defaults_AreTheFloaterValues() {
+        public void Defaults_HaveTheShippedValues() {
             Assert.IsTrue(_settings.hasFloor);
             Assert.AreEqual(-100f, _settings.floorHeight);
             Assert.AreEqual(5, _settings.embeddedChecksBeforeRescue);

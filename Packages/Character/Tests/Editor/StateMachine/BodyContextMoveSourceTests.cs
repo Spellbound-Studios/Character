@@ -49,11 +49,5 @@ namespace Spellbound.Character.StateMachine.Editor.Tests {
             Assert.Less(Vector3.Distance(new Vector3(0f, 0f, 1f), _context.DesiredMove), Tolerance);
             Assert.Less(Vector3.Distance(new Vector3(0f, 1f, 0f), _context.DesiredUp), Tolerance);
         }
-
-        private sealed class ContextMoveSource : IMoveSource {
-            public Vector3 DesiredMove { get; set; }
-
-            public Vector3 DesiredUp { get; set; }
-        }
     }
 }
