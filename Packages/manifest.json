@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.spellboundstudios.core": "https://github.com/Spellbound-Studios/Core.git?path=/Packages/Core#dev",
+    "com.spellboundstudios.geoforge": "https://github.com/Spellbound-Studios/GeoForge.git?path=/Packages/GeoForge#dev_1.0",
     "com.spellboundstudios.packagecheck": "https://github.com/Spellbound-Studios/PackageCheck.git?path=/Packages/PackageCheck#beta",
     "com.spellboundstudios.statemachine": "https://github.com/Spellbound-Studios/StateMachine.git?path=/Packages/StateMachine#beta",
     "com.unity.cinemachine": "3.1.7",
