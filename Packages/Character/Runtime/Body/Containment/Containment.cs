@@ -15,8 +15,6 @@ namespace Spellbound.Character.Body {
     public sealed class Containment : MonoBehaviour {
         private const int RescueValueCount = 7;
         private const int RememberedRescueCount = 16;
-        private const float SupportProbeSkinMetres = 0.1f;
-        private const float SupportProbeRadiusMetres = 0.05f;
 
         [SerializeField] private ContainmentSettings settings;
 
@@ -215,7 +213,7 @@ namespace Spellbound.Character.Body {
             var halfHeight = Mathf.Abs(extents.x * worldUp.x) + Mathf.Abs(extents.y * worldUp.y) +
                              Mathf.Abs(extents.z * worldUp.z);
             var support = SupportProbe.Probe(_physicsScene, bounds.center, -worldUp,
-                halfHeight + SupportProbeSkinMetres, SupportProbeRadiusMetres, settings.supportLayers);
+                halfHeight + settings.supportReachMetres, 0f, settings.supportLayers);
 
             return support.HasHit;
         }

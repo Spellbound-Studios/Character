@@ -18,6 +18,7 @@ namespace Spellbound.Character.Body {
         public int checkStride = 5;
         public int rescuePriority = 1000;
         public float supportHoldTimeoutSeconds = 10f;
+        public float supportReachMetres = 1f;
         public LayerMask supportLayers = ~0;
 
         public void Validate(ValidationReport report) {
@@ -59,6 +60,12 @@ namespace Spellbound.Character.Body {
                 report.Error("character.containment-hold-timeout-negative",
                     "The support hold timeout is negative.", nameof(supportHoldTimeoutSeconds),
                     "Set the timeout to zero or more seconds.");
+            }
+
+            if (!(supportReachMetres >= 0f)) {
+                report.Error("character.containment-support-reach-negative",
+                    "The support reach under the body is negative, so no position is ever remembered as supported.",
+                    nameof(supportReachMetres), "Set the reach to zero or more metres.");
             }
 
             if (rescuePriority < 1) {

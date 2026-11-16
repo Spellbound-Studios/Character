@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 787336104198740652}
   - component: {fileID: 4032904612442358553}
   - component: {fileID: 3376700114888328010}
+  - component: {fileID: 588272395186102774}
+  - component: {fileID: 9029108151765870294}
   m_Layer: 0
   m_Name: LocomotionCharacter
   m_TagString: Untagged
@@ -182,6 +184,36 @@ MonoBehaviour:
   world: {fileID: 0}
   binding:
     holdSeconds: 0.5
+--- !u!114 &588272395186102774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358326698747160760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 190a20b243fe7c746a234080fbbc84ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Spellbound.Character.Body::Spellbound.Character.Body.SupportGate
+  settings: {fileID: 11400000, guid: fd2f8bd91951e694c9a89cc2b13e13a7, type: 2}
+  world: {fileID: 0}
+--- !u!114 &9029108151765870294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358326698747160760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132ce0a15ce7cfd459fc99b91ef81ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Spellbound.Character.Body::Spellbound.Character.Body.Containment
+  settings: {fileID: 11400000, guid: fd2f8bd91951e694c9a89cc2b13e13a7, type: 2}
+  world: {fileID: 0}
+  skipSleeping: 1
+  skipKinematic: 1
 --- !u!1001 &6849845904220425196
 PrefabInstance:
   m_ObjectHideFlags: 0

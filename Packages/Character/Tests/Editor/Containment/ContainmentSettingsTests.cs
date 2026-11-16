@@ -36,6 +36,7 @@ namespace Spellbound.Character.Editor.Tests {
             Assert.AreEqual(5, _settings.checkStride);
             Assert.AreEqual(1000, _settings.rescuePriority);
             Assert.AreEqual(10f, _settings.supportHoldTimeoutSeconds);
+            Assert.AreEqual(1f, _settings.supportReachMetres);
             Assert.AreEqual(~0, _settings.supportLayers.value);
         }
 
@@ -113,6 +114,13 @@ namespace Spellbound.Character.Editor.Tests {
             _settings.supportHoldTimeoutSeconds = -1f;
 
             AssertOnlyError("character.containment-hold-timeout-negative");
+        }
+
+        [Test]
+        public void Validate_ReportsANegativeSupportReach() {
+            _settings.supportReachMetres = -0.5f;
+
+            AssertOnlyError("character.containment-support-reach-negative");
         }
 
         [Test]
