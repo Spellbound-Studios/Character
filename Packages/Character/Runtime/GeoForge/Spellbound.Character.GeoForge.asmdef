@@ -1,0 +1,25 @@
+{
+  "name": "Spellbound.Character.GeoForge",
+  "rootNamespace": "Spellbound.Character.GeoForge",
+  "references": ["Spellbound.Core", "Spellbound.Character.Body", "Spellbound.GeoForge"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": ["SPELLBOUND_CORE", "SPELLBOUND_GEOFORGE"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.spellboundstudios.geoforge",
+      "expression": "[0.6.24,1.0.0)",
+      "define": "SPELLBOUND_GEOFORGE"
+    }
+  ],
+  "noEngineReferences": false
+}
