@@ -97,7 +97,7 @@ namespace Spellbound.Character.Editor.Tests {
         }
 
         [Test]
-        public void Resolve_NoOpenAirWithinTheRange_FallsBackWithAWarning() {
+        public void Resolve_NoOpenAirWithinTheRange_FallsBackToTheAnchor() {
             _settings.maxOpenSearchMetres = 2f;
             _space.Solids.Add(new Bounds(Vector3.zero, new Vector3(10f, 40f, 10f)));
 #if SPELLBOUND_LOG_WARNING

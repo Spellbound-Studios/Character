@@ -22,7 +22,7 @@ namespace Spellbound.Character.Samples.Locomotion.Tests {
         public void DestroyGym() => _gym.Dispose();
 
         [UnityTest]
-        public IEnumerator Character_IsTheContextsMoveSource_WithItsInputMoveAndTheWorldsUp() {
+        public IEnumerator Character_IsTheContextsMoveSource_WithItsInputMoveAndItsUpProvidersUp() {
             _input.Move = Vector2.right;
             var character = _gym.CreateCharacter(_input);
 

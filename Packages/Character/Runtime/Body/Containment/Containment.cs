@@ -44,6 +44,7 @@ namespace Spellbound.Character.Body {
         private bool _falling;
         private float _fallSeconds;
         private bool _missingSettingsReported;
+        private bool _missingWorldReported;
 
         public IReferenceFrameWorld World {
             get => _handedWorld;
@@ -118,6 +119,7 @@ namespace Spellbound.Character.Body {
             _falling = false;
             _fallSeconds = 0f;
             _missingSettingsReported = false;
+            _missingWorldReported = false;
             _resolvedWorld = ResolveWorld();
         }
 
@@ -127,6 +129,9 @@ namespace Spellbound.Character.Body {
 
                 return;
             }
+
+            if (_resolvedWorld == null)
+                ReportMissingWorld();
 
             _stepsSinceCheck++;
 
@@ -299,6 +304,14 @@ namespace Spellbound.Character.Body {
 
             _missingSettingsReported = true;
             Log.Error($"[Containment] '{name}' has no containment settings and checks nothing.", this);
+        }
+
+        private void ReportMissingWorld() {
+            if (_missingWorldReported)
+                return;
+
+            _missingWorldReported = true;
+            Log.Error($"[Containment] '{name}' found no reference frame world and never rescues.", this);
         }
 
         private IReferenceFrameWorld ResolveWorld() {

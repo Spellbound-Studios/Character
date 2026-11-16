@@ -73,5 +73,30 @@ namespace Spellbound.Character.Tests {
 
             Assert.IsFalse(result.HasHit);
         }
+
+        [UnityTest]
+        public IEnumerator Probe_WithNoRadius_CastsARayToTheFloor() {
+            yield return new WaitForFixedUpdate();
+
+            ISupportProbe probe = new PhysicsSupportProbe();
+            var result = probe.Probe(_body.scene.GetPhysicsScene(), BodyOrigin, Vector3.down, ProbeDistance, 0f,
+                ~0);
+
+            Assert.IsTrue(result.HasHit);
+            Assert.AreEqual(0.9f, result.Distance, 0.01f);
+            Assert.AreEqual(0.1f, result.Point.y, 0.01f);
+            Assert.AreEqual(1f, result.Normal.y, 0.01f);
+        }
+
+        [UnityTest]
+        public IEnumerator Probe_WithNoRadius_IgnoresLayersOutsideTheMask() {
+            yield return new WaitForFixedUpdate();
+
+            ISupportProbe probe = new PhysicsSupportProbe();
+            var result = probe.Probe(_body.scene.GetPhysicsScene(), BodyOrigin, Vector3.down, ProbeDistance, 0f,
+                ~(1 << _floor.layer));
+
+            Assert.IsFalse(result.HasHit);
+        }
     }
 }

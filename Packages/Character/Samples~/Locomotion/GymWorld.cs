@@ -46,11 +46,6 @@ namespace Spellbound.Character.Samples.Locomotion {
             set => contextName = value;
         }
 
-        public Transform SpawnMarker {
-            get => spawnMarker;
-            set => spawnMarker = value;
-        }
-
         public void Admit(GameObject character) {
             if (character == null)
                 throw new ArgumentNullException(nameof(character));

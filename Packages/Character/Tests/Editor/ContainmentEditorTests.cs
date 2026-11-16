@@ -39,7 +39,7 @@ namespace Spellbound.Character.Editor.Tests {
         }
 
         [Test]
-        public void HasFloor_Toggled_HidesAndShowsTheFloorRow() {
+        public void CreateInspectorGUI_HidesTheFloorRowWithoutAFloorAndShowsItWithOne() {
             SetHasFloor(false);
             var withoutFloor = FloorRow(_editor.CreateInspectorGUI());
 

@@ -20,7 +20,6 @@ namespace Spellbound.Character.Editor {
                 Gizmos.color = colour;
                 Gizmos.DrawLine(from, target);
                 Gizmos.DrawWireSphere(target, TargetRadiusMetres);
-                Handles.color = colour;
                 Handles.Label(target, step.Reason.ToString());
             }
         }

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Spellbound.Character.Body;
 using Spellbound.Core;
@@ -219,6 +220,28 @@ namespace Spellbound.Character.Tests {
             Assert.AreEqual(StartPosition.x, FloatAt(rescues[0], 4), Tolerance);
             Assert.AreEqual(StartPosition.y, FloatAt(rescues[0], 5), Tolerance);
             Assert.AreEqual(StartPosition.z, FloatAt(rescues[0], 6), Tolerance);
+        }
+
+        [UnityTest]
+        public IEnumerator Containment_WithoutAWorld_LogsAnErrorOnceAndRescuesNothing() {
+            var containment = CreateContainment(false);
+            var bodyObject = containment.gameObject;
+            var body = containment.GetComponent<Rigidbody>();
+            bodyObject.SetActive(false);
+            bodyObject.transform.SetParent(null, true);
+            bodyObject.SetActive(true);
+
+            LogAssert.Expect(LogType.Error, new Regex("found no reference frame world"));
+            Teleport(body, BelowFloorPosition);
+
+            for (var step = 0; step < 3; step++)
+                yield return Step();
+
+            Assert.AreEqual(0, containment.LastRescues.Count);
+            Assert.Less(Vector3.Distance(BelowFloorPosition, body.position), Tolerance);
+            Assert.AreEqual(0, RescueRecords().Count);
+
+            Object.Destroy(bodyObject);
         }
 
         private Containment CreateContainment(bool useGravity, bool withHeldGate = false) {

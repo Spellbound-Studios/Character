@@ -89,6 +89,18 @@ namespace Spellbound.Character.Editor.Tests {
         }
 
         [Test]
+        public void Rescue_KeepsTheBodysFacing() {
+            var facing = Quaternion.Euler(0f, 30f, 0f);
+            _bodyObject.transform.rotation = facing;
+            Physics.SyncTransforms();
+
+            _rescuer.Rescue(_body, _motion, StepTo(Target), Upward);
+
+            Assert.Less(Quaternion.Angle(facing, _bodyObject.transform.rotation), 0.01f);
+            Assert.Less(Quaternion.Angle(facing, _body.rotation), 0.01f);
+        }
+
+        [Test]
         public void ClaimDriver_EndsAtTheTargetAtRestInTheWorldFrame() {
             var driver = new RescueClaimDriver();
             var target = new Pose(Target, Quaternion.Euler(0f, 90f, 0f));
