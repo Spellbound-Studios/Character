@@ -1,0 +1,25 @@
+{
+  "name": "Spellbound.Character.WorldObjects.Tests",
+  "rootNamespace": "Spellbound.Character.WorldObjects.Tests",
+  "references": ["Spellbound.Character.WorldObjects", "Spellbound.Character.Body", "Spellbound.Character.Tests", "Spellbound.Core", "Spellbound.WorldObjects", "Unity.Mathematics", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": ["UNITY_INCLUDE_TESTS", "SPELLBOUND_CORE", "SPELLBOUND_WORLDOBJECTS"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.spellboundstudios.worldobjects",
+      "expression": "[0.0.0,2.0.0)",
+      "define": "SPELLBOUND_WORLDOBJECTS"
+    }
+  ],
+  "noEngineReferences": false
+}

@@ -4,9 +4,11 @@
     "com.spellboundstudios.geoforge": "https://github.com/Spellbound-Studios/GeoForge.git?path=/Packages/GeoForge#dev_1.0",
     "com.spellboundstudios.packagecheck": "https://github.com/Spellbound-Studios/PackageCheck.git?path=/Packages/PackageCheck#beta",
     "com.spellboundstudios.statemachine": "https://github.com/Spellbound-Studios/StateMachine.git?path=/Packages/StateMachine#beta",
+    "com.spellboundstudios.worldobjects": "https://github.com/Spellbound-Studios/WorldObjects.git?path=/Packages/WorldObjects#beta",
     "com.unity.cinemachine": "3.1.7",
     "com.unity.ide.rider": "3.0.40",
     "com.unity.inputsystem": "1.19.0",
+    "com.unity.pipeline": "0.8.0-exp.1",
     "com.unity.render-pipelines.universal": "17.4.0",
     "com.unity.test-framework": "1.6.0",
     "com.unity.modules.accessibility": "1.0.0",
@@ -42,7 +44,6 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0",
-    "com.unity.pipeline": "0.8.0-exp.1"
+    "com.unity.modules.xr": "1.0.0"
   }
 }
