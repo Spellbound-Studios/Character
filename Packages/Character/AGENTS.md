@@ -14,25 +14,30 @@ StateMachine, in the bridge `Spellbound.Character.StateMachine`, which compiles 
 
 Presentation, in `Spellbound.Character.Presentation`, which compiles out on a server build: `MeshBoundsMath.FindSharedMeshBounds(gameObject)` gives the mesh bounds `ResizableCapsuleCollider.Initialize` sizes the capsule from. `WornPieceRebinding.Rebind(wornPiece, targetRoot)` rebinds a worn piece to a target rig in edit mode with no scene: it matches the names of every `SkinnedMeshRenderer` bone and root bone under the piece, the piece itself included, to the first transform of that name under the target root, the root itself included, and when every name is found rewrites each renderer's bones and root bone to the target's and returns a complete `RebindMap`. When any name is missing it changes nothing and returns the map with `Missing` listing each missing name once and `Bones` holding the names it found; it instantiates nothing and adds nothing, and a null piece or target root throws ArgumentNullException. The editor operation `Spellbound/Character/Measure Capsule From Mesh`, in `Spellbound.Character.Presentation.Editor`, measures a selected object of a prefab through it and writes the capsule into the prefab.
 
-<!-- spellbound:samples 3a8448c2 -->
+<!-- spellbound:samples b22faa6e -->
 Samples in `Samples~`, imported from the Package Manager's Samples tab:
 - Locomotion: Walk, run, jump and fall over StateMachine, on a character that carries the playable marker. (`Samples~/Locomotion`)
+- Swim And Fly: Swimming and flying as motion drivers over motion claims, with containment on the character and no StateMachine. (`Samples~/SwimAndFly`)
 <!-- /spellbound:samples -->
 
-<!-- spellbound:depends 8515c256 -->
+<!-- spellbound:depends 24dd0e8b -->
 Depends on:
 - `com.spellboundstudios.core` in [1.1.9,3.0.0)
 Bridges, each compiled only when its package is installed:
 - `Spellbound.Character.Cinemachine` when `com.unity.cinemachine` is in [3.1.6,4.0.0)
+- `Spellbound.Character.GeoForge` when `com.spellboundstudios.geoforge` is in [0.6.24,1.0.0)
 - `Spellbound.Character.StateMachine` when `com.spellboundstudios.statemachine` is in [0.0.0,2.0.0)
+- `Spellbound.Character.WorldObjects` when `com.spellboundstudios.worldobjects` is in [0.0.0,2.0.0)
 <!-- /spellbound:depends -->
 
-<!-- spellbound:doors 845eb3c7 -->
+<!-- spellbound:doors 3055055c -->
 Bridge doors in this project, the constructors of the types a bridge assembly adds:
 - `CharacterCinemachineKit` in `Spellbound.Character.Cinemachine`
   - `static ICameraRig Rig(GameObject root)`
 - `CharacterStateMachineKit` in `Spellbound.Character.StateMachine`
   - `static StateMachine<BodyContext, TStateKey> Create<TStateKey>(BodyContext context, IStateMachineConfiguration<TStateKey> configuration)`
+- `CharacterWorldObjectsKit` in `Spellbound.Character.WorldObjects`
+  - `static InstanceRide Ride(WorldInstance world, InstanceId instance)`
 <!-- /spellbound:doors -->
 
 <!-- spellbound:operations 77e02b09 -->

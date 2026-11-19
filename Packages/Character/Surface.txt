@@ -13,7 +13,40 @@ member Spellbound.Character.Body.CapsuleFloatData.SpringStrength : System.Single
 member Spellbound.Character.Body.CapsuleFloatData.StepHeightPercentage : System.Single { get; }
 member Spellbound.Character.Body.CapsuleFloatData.WallProbeDistance : System.Single { get; set; }
 member Spellbound.Character.Body.CapsuleFloatData.new()
+member Spellbound.Character.Body.CharacterObservations.ContainmentRepair : static readonly Spellbound.Core.Observations.Guard
+member Spellbound.Character.Body.CharacterObservations.ContainmentRescue : static readonly Spellbound.Core.Observations.Occurrence
 member Spellbound.Character.Body.CharacterObservations.ReferenceFrameBound : static readonly Spellbound.Core.Observations.Occurrence
+member Spellbound.Character.Body.CharacterObservations.SupportHeld : static readonly Spellbound.Core.Observations.Guard
+member Spellbound.Character.Body.Containment.LastRescues : System.Collections.Generic.IReadOnlyList<System.ValueTuple<UnityEngine.Vector3, Spellbound.Character.Body.RescueStep>> { get; }
+member Spellbound.Character.Body.Containment.Motion : Spellbound.Character.Body.MotionClaims { get; set; }
+member Spellbound.Character.Body.Containment.MoveSource : Spellbound.Character.Body.IMoveSource { get; set; }
+member Spellbound.Character.Body.Containment.RescueTarget : Spellbound.Character.Body.IRescueTarget { get; set; }
+member Spellbound.Character.Body.Containment.Space : Spellbound.Character.Body.IContainmentSpace { get; set; }
+member Spellbound.Character.Body.Containment.SupportProbe : Spellbound.Character.Body.ISupportProbe { get; set; }
+member Spellbound.Character.Body.Containment.Up : UnityEngine.Vector3 { get; }
+member Spellbound.Character.Body.Containment.UpProvider : Spellbound.Core.ReferenceFrames.IUpProvider { get; set; }
+member Spellbound.Character.Body.Containment.World : Spellbound.Character.Body.IReferenceFrameWorld { get; set; }
+member Spellbound.Character.Body.Containment.new()
+member Spellbound.Character.Body.ContainmentReason.BelowFloor : Spellbound.Character.Body.ContainmentReason = 1
+member Spellbound.Character.Body.ContainmentReason.Embedded : Spellbound.Character.Body.ContainmentReason = 2
+member Spellbound.Character.Body.ContainmentReason.None : Spellbound.Character.Body.ContainmentReason = 0
+member Spellbound.Character.Body.ContainmentReason.SupportTimeout : Spellbound.Character.Body.ContainmentReason = 4
+member Spellbound.Character.Body.ContainmentReason.SustainedFall : Spellbound.Character.Body.ContainmentReason = 3
+member Spellbound.Character.Body.ContainmentSettings.Validate(Spellbound.Core.Authoring.ValidationReport) : System.Void
+member Spellbound.Character.Body.ContainmentSettings.checkStride : System.Int32
+member Spellbound.Character.Body.ContainmentSettings.embeddedChecksBeforeRescue : System.Int32
+member Spellbound.Character.Body.ContainmentSettings.fallbackAnchor : UnityEngine.Vector3
+member Spellbound.Character.Body.ContainmentSettings.floorHeight : System.Single
+member Spellbound.Character.Body.ContainmentSettings.hasFloor : System.Boolean
+member Spellbound.Character.Body.ContainmentSettings.maxOpenSearchMetres : System.Single
+member Spellbound.Character.Body.ContainmentSettings.new()
+member Spellbound.Character.Body.ContainmentSettings.openSearchStepMetres : System.Single
+member Spellbound.Character.Body.ContainmentSettings.rescuePriority : System.Int32
+member Spellbound.Character.Body.ContainmentSettings.supportHoldTimeoutSeconds : System.Single
+member Spellbound.Character.Body.ContainmentSettings.supportLayers : UnityEngine.LayerMask
+member Spellbound.Character.Body.ContainmentSettings.supportReachMetres : System.Single
+member Spellbound.Character.Body.ContainmentSettings.sustainedFallSeconds : System.Single
+member Spellbound.Character.Body.ContainmentSettings.sustainedFallSpeed : System.Single
 member Spellbound.Character.Body.DefaultColliderData.FallbackHeight : System.Single { get; set; }
 member Spellbound.Character.Body.DefaultColliderData.FallbackRadius : System.Single { get; set; }
 member Spellbound.Character.Body.DefaultColliderData.HandleValidation() : System.Void
@@ -47,13 +80,19 @@ member Spellbound.Character.Body.ICameraRig.CurrentCameraTransform : UnityEngine
 member Spellbound.Character.Body.ICameraRig.CurrentChanged : event System.Action<System.String, System.String>
 member Spellbound.Character.Body.ICameraRig.SetFollowTarget(UnityEngine.Transform) : System.Void
 member Spellbound.Character.Body.ICameraRig.Switch(System.String) : System.Boolean
+member Spellbound.Character.Body.IContainmentSpace.Classify(in UnityEngine.Bounds) : Spellbound.Core.Ground.Occupancy
+member Spellbound.Character.Body.IContainmentSpace.IsReady(in UnityEngine.Bounds) : System.Boolean
 member Spellbound.Character.Body.IMotionDriver.Begin(in Spellbound.Character.Body.Handoff) : System.Void
 member Spellbound.Character.Body.IMotionDriver.End() : Spellbound.Character.Body.Handoff
 member Spellbound.Character.Body.IMotionDriver.NeedsSupport : System.Boolean { get; }
 member Spellbound.Character.Body.IMotionDriver.Priority : System.Int32 { get; }
+member Spellbound.Character.Body.IMoveSource.DesiredMove : UnityEngine.Vector3 { get; }
+member Spellbound.Character.Body.IMoveSource.DesiredUp : UnityEngine.Vector3 { get; }
 member Spellbound.Character.Body.IReferenceFrameWorld.CurrentTick : Spellbound.Core.Simulation.Tick { get; }
 member Spellbound.Character.Body.IReferenceFrameWorld.Observations : Spellbound.Core.Observations.ObservationContext { get; }
 member Spellbound.Character.Body.IReferenceFrameWorld.ReferenceFrames : Spellbound.Core.ReferenceFrames.ReferenceFrameDirectory { get; }
+member Spellbound.Character.Body.IRescueTarget.Fallback(UnityEngine.Vector3) : UnityEngine.Pose
+member Spellbound.Character.Body.ISupportProbe.Probe(UnityEngine.PhysicsScene, UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single, System.Int32) : Spellbound.Character.Body.GroundProbeResult
 member Spellbound.Character.Body.InterpolationMath.LerpWithSpeed(System.Single, System.Single, System.Single, System.Single) : static System.Single
 member Spellbound.Character.Body.InterpolationMath.RemapValue(System.Single, System.Single, System.Single, System.Single, System.Single) : static System.Single
 member Spellbound.Character.Body.InterpolationMath.SmoothDampFloat(System.Single, System.Single, ref System.Single, System.Single, System.Single, System.Single) : static System.Single
@@ -64,6 +103,11 @@ member Spellbound.Character.Body.MotionClaims.Active : Spellbound.Character.Body
 member Spellbound.Character.Body.MotionClaims.Claim(Spellbound.Character.Body.IMotionDriver) : Spellbound.Character.Body.MotionClaim
 member Spellbound.Character.Body.MotionClaims.Count : System.Int32 { get; }
 member Spellbound.Character.Body.MotionClaims.new()
+member Spellbound.Character.Body.PhysicsContainmentSpace.Classify(in UnityEngine.Bounds) : Spellbound.Core.Ground.Occupancy
+member Spellbound.Character.Body.PhysicsContainmentSpace.IsReady(in UnityEngine.Bounds) : System.Boolean
+member Spellbound.Character.Body.PhysicsContainmentSpace.new()
+member Spellbound.Character.Body.PhysicsSupportProbe.Probe(UnityEngine.PhysicsScene, UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single, System.Int32) : Spellbound.Character.Body.GroundProbeResult
+member Spellbound.Character.Body.PhysicsSupportProbe.new()
 member Spellbound.Character.Body.PlayableCharacters.IsPlayable(UnityEngine.GameObject) : static System.Boolean
 member Spellbound.Character.Body.ReferenceFrameBinding.Bind(Spellbound.Core.ReferenceFrames.IReferenceFrame, UnityEngine.Pose, System.Double) : System.Void
 member Spellbound.Character.Body.ReferenceFrameBinding.BoundFrame : Spellbound.Core.ReferenceFrames.IReferenceFrame { get; }
@@ -90,6 +134,18 @@ member Spellbound.Character.Body.ReferenceFrameSource.VelocityAt(UnityEngine.Vec
 member Spellbound.Character.Body.ReferenceFrameSource.World : Spellbound.Character.Body.IReferenceFrameWorld { get; set; }
 member Spellbound.Character.Body.ReferenceFrameSource.WorldPose : abstract UnityEngine.Pose { get; }
 member Spellbound.Character.Body.ReferenceFrameSource.new()
+member Spellbound.Character.Body.RescueLadder.RememberSupported(UnityEngine.Vector3) : System.Void
+member Spellbound.Character.Body.RescueLadder.Resolve(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Vector3, Spellbound.Character.Body.ContainmentReason) : Spellbound.Character.Body.RescueStep
+member Spellbound.Character.Body.RescueLadder.new(Spellbound.Character.Body.ContainmentSettings, Spellbound.Character.Body.IContainmentSpace, Spellbound.Character.Body.IRescueTarget)
+member Spellbound.Character.Body.RescueRung.Fallback : Spellbound.Character.Body.RescueRung = 2
+member Spellbound.Character.Body.RescueRung.LastSupported : Spellbound.Character.Body.RescueRung = 0
+member Spellbound.Character.Body.RescueRung.OpenAbove : Spellbound.Character.Body.RescueRung = 1
+member Spellbound.Character.Body.RescueStep.Reason : Spellbound.Character.Body.ContainmentReason { get; }
+member Spellbound.Character.Body.RescueStep.Rung : Spellbound.Character.Body.RescueRung { get; }
+member Spellbound.Character.Body.RescueStep.Target : UnityEngine.Pose { get; }
+member Spellbound.Character.Body.RescueStep.new(UnityEngine.Pose, Spellbound.Character.Body.RescueRung, Spellbound.Character.Body.ContainmentReason)
+member Spellbound.Character.Body.Rescuer.Rescue(UnityEngine.Rigidbody, Spellbound.Character.Body.MotionClaims, in Spellbound.Character.Body.RescueStep, UnityEngine.Vector3) : System.Void
+member Spellbound.Character.Body.Rescuer.new(Spellbound.Character.Body.ContainmentSettings)
 member Spellbound.Character.Body.ResizableCapsuleCollider.CalculateCapsuleColliderDimensions() : System.Void
 member Spellbound.Character.Body.ResizableCapsuleCollider.CapsuleFloatData : Spellbound.Character.Body.CapsuleFloatData { get; }
 member Spellbound.Character.Body.ResizableCapsuleCollider.DefaultColliderData : Spellbound.Character.Body.DefaultColliderData { get; }
@@ -111,6 +167,8 @@ member Spellbound.Character.Body.RotationMath.GetRotationAngleDifference(UnityEn
 member Spellbound.Character.Body.RotationMath.HandleCharacterRotation(UnityEngine.Rigidbody, UnityEngine.Vector3, System.Single, System.Single, System.Single) : static System.Void
 member Spellbound.Character.Body.RotationMath.HandleCharacterRotation(UnityEngine.Rigidbody, UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single, System.Single) : static System.Void
 member Spellbound.Character.Body.RotationMath.RotateTowardsDirection(UnityEngine.Quaternion, UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single) : static UnityEngine.Quaternion
+member Spellbound.Character.Body.SettingsRescueTarget.Fallback(UnityEngine.Vector3) : UnityEngine.Pose
+member Spellbound.Character.Body.SettingsRescueTarget.new(Spellbound.Character.Body.ContainmentSettings)
 member Spellbound.Character.Body.SlopeMath.CancelIntoSurface(UnityEngine.Vector3, UnityEngine.Vector3) : static UnityEngine.Vector3
 member Spellbound.Character.Body.SlopeMath.GetDirectionTangentToSurface(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Vector3) : static UnityEngine.Vector3
 member Spellbound.Character.Body.SlopeMath.GetSlopeAccelerationMagnitude(System.Single, System.Single) : static System.Single
@@ -119,6 +177,13 @@ member Spellbound.Character.Body.SlopeMath.GetSlopeAngle(UnityEngine.Vector3, Un
 member Spellbound.Character.Body.SlopeMath.GetSlopeDirection(UnityEngine.Vector3, UnityEngine.Vector3) : static UnityEngine.Vector3
 member Spellbound.Character.Body.SlopeMath.GetSlopeReachFactor(System.Single, System.Single, System.Single) : static System.Single
 member Spellbound.Character.Body.SlopeMath.ProjectOntoCrease(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Vector3) : static UnityEngine.Vector3
+member Spellbound.Character.Body.SupportGate.HeldSince : Spellbound.Core.Simulation.Tick { get; }
+member Spellbound.Character.Body.SupportGate.IsHeld : System.Boolean { get; }
+member Spellbound.Character.Body.SupportGate.Motion : Spellbound.Character.Body.MotionClaims { get; set; }
+member Spellbound.Character.Body.SupportGate.RescueTarget : Spellbound.Character.Body.IRescueTarget { get; set; }
+member Spellbound.Character.Body.SupportGate.Space : Spellbound.Character.Body.IContainmentSpace { get; set; }
+member Spellbound.Character.Body.SupportGate.World : Spellbound.Character.Body.IReferenceFrameWorld { get; set; }
+member Spellbound.Character.Body.SupportGate.new()
 member Spellbound.Character.Body.SupportProbeMath.CheckOverlapSphere(UnityEngine.Vector3, System.Single, UnityEngine.LayerMask) : static System.Boolean
 member Spellbound.Character.Body.SupportProbeMath.ProbeGround(UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single, UnityEngine.LayerMask) : static Spellbound.Character.Body.GroundProbeResult
 member Spellbound.Character.Body.TransformReferenceFrameSource.AngularVelocity : override UnityEngine.Vector3 { get; }
@@ -170,12 +235,17 @@ member Spellbound.Character.Cinemachine.ClampedFollowDamping.new()
 member Spellbound.Character.Cinemachine.ThirdPersonFollowZoom.Distance : Unity.Cinemachine.InputAxis
 member Spellbound.Character.Cinemachine.ThirdPersonFollowZoom.new()
 member Spellbound.Character.Editor.BuildRagdollWindow.new()
+member Spellbound.Character.Editor.ContainmentSettingsEditor.CreateInspectorGUI() : override UnityEngine.UIElements.VisualElement
+member Spellbound.Character.Editor.ContainmentSettingsEditor.new()
 member Spellbound.Character.Editor.RideableColliderCheck.Check(Spellbound.Character.Body.RidingSettings, Spellbound.Core.Authoring.ValidationReport) : System.Void
 member Spellbound.Character.Editor.RideableColliderCheck.Name : const System.String = "character.rideable-collider-without-frame"
 member Spellbound.Character.Editor.RideableColliderCheck.PreviewLines(Spellbound.Character.Body.RidingSettings) : System.Collections.Generic.IReadOnlyList<System.String>
 member Spellbound.Character.Editor.RideableColliderCheck.new()
 member Spellbound.Character.Editor.RigKindMapping.ToAnimationType(Spellbound.Character.Rig.RigKind) : static UnityEditor.ModelImporterAnimationType
 member Spellbound.Character.Editor.RigKindMapping.TryFromAnimationType(UnityEditor.ModelImporterAnimationType, out Spellbound.Character.Rig.RigKind) : static System.Boolean
+member Spellbound.Character.GeoForge.GeoForgeContainmentSpace.Classify(in UnityEngine.Bounds) : Spellbound.Core.Ground.Occupancy
+member Spellbound.Character.GeoForge.GeoForgeContainmentSpace.IsReady(in UnityEngine.Bounds) : System.Boolean
+member Spellbound.Character.GeoForge.GeoForgeContainmentSpace.new(Spellbound.GeoForge.IGeoVolume)
 member Spellbound.Character.Presentation.MeshBoundsMath.FindSharedMeshBounds(UnityEngine.GameObject) : static System.Nullable<UnityEngine.Bounds>
 member Spellbound.Character.Presentation.WornPieceRebinding.Rebind(UnityEngine.GameObject, UnityEngine.Transform) : static Spellbound.Character.Rig.RebindMap
 member Spellbound.Character.Rig.AnimationMath.NormalizeBlend(System.Single, System.ReadOnlySpan<System.Single>) : static System.Single
@@ -336,8 +406,10 @@ member Spellbound.Character.Rig.SocketTable.TryGet(System.String, out Spellbound
 member Spellbound.Character.Rig.SocketTable.new(System.Collections.Generic.IReadOnlyList<Spellbound.Character.Rig.ResolvedSocket>, System.Collections.Generic.IReadOnlyList<System.String>, System.Collections.Generic.IReadOnlyList<System.String>)
 member Spellbound.Character.StateMachine.BodyContext.Capsule : Spellbound.Character.Body.ResizableCapsuleCollider { get; }
 member Spellbound.Character.StateMachine.BodyContext.DesiredMove : UnityEngine.Vector3 { get; set; }
+member Spellbound.Character.StateMachine.BodyContext.DesiredUp : UnityEngine.Vector3 { get; }
 member Spellbound.Character.StateMachine.BodyContext.ElapsedFixedTime : System.Double { get; set; }
 member Spellbound.Character.StateMachine.BodyContext.Motion : Spellbound.Character.Body.MotionClaims { get; }
+member Spellbound.Character.StateMachine.BodyContext.MoveSource : Spellbound.Character.Body.IMoveSource { get; set; }
 member Spellbound.Character.StateMachine.BodyContext.ReferenceFrame : Spellbound.Character.Body.ReferenceFrameBinding { get; }
 member Spellbound.Character.StateMachine.BodyContext.Rigidbody : UnityEngine.Rigidbody { get; }
 member Spellbound.Character.StateMachine.BodyContext.Support : Spellbound.Character.Body.GroundProbeResult { get; set; }
@@ -346,29 +418,54 @@ member Spellbound.Character.StateMachine.BodyContext.new(UnityEngine.Transform, 
 member Spellbound.Character.StateMachine.BodyState.Body : Spellbound.Character.StateMachine.BodyContext { get; }
 member Spellbound.Character.StateMachine.BodyState.new()
 member Spellbound.Character.StateMachine.CharacterStateMachineKit.Create<TStateKey>(Spellbound.Character.StateMachine.BodyContext, Spellbound.StateMachine.IStateMachineConfiguration<TStateKey>) : static Spellbound.StateMachine.StateMachine<Spellbound.Character.StateMachine.BodyContext, TStateKey>
+member Spellbound.Character.WorldObjects.CharacterWorldObjectsKit.Ride(Spellbound.WorldObjects.WorldInstance, Spellbound.Core.Simulation.InstanceId) : static Spellbound.Character.WorldObjects.InstanceRide
+member Spellbound.Character.WorldObjects.InstanceRide.Bind(Spellbound.Core.ReferenceFrames.IReferenceFrame, System.Double) : System.Void
+member Spellbound.Character.WorldObjects.InstanceRide.Binding : Spellbound.Character.Body.ReferenceFrameBinding { get; }
+member Spellbound.Character.WorldObjects.InstanceRide.IsBound : System.Boolean { get; }
+member Spellbound.Character.WorldObjects.InstanceRide.Release() : System.Void
+member Spellbound.Character.WorldObjects.WorldObjectsReferenceFrameWorld.CurrentTick : Spellbound.Core.Simulation.Tick { get; }
+member Spellbound.Character.WorldObjects.WorldObjectsReferenceFrameWorld.Observations : Spellbound.Core.Observations.ObservationContext { get; }
+member Spellbound.Character.WorldObjects.WorldObjectsReferenceFrameWorld.ReferenceFrames : Spellbound.Core.ReferenceFrames.ReferenceFrameDirectory { get; }
+member Spellbound.Character.WorldObjects.WorldObjectsReferenceFrameWorld.World : Spellbound.WorldObjects.WorldInstance { get; set; }
+member Spellbound.Character.WorldObjects.WorldObjectsReferenceFrameWorld.new()
 type Spellbound.Character.Body.CapsuleFloatData : class
 type Spellbound.Character.Body.CharacterObservations : static class
+type Spellbound.Character.Body.Containment : sealed class : UnityEngine.MonoBehaviour
+type Spellbound.Character.Body.ContainmentReason : enum
+type Spellbound.Character.Body.ContainmentSettings : sealed class : UnityEngine.ScriptableObject, Spellbound.Core.Authoring.IAuthoredDefinition
 type Spellbound.Character.Body.DefaultColliderData : class
 type Spellbound.Character.Body.FloatSpringMath : static class
 type Spellbound.Character.Body.GroundProbeResult : readonly struct
 type Spellbound.Character.Body.Handoff : readonly struct
 type Spellbound.Character.Body.ICameraRig : interface
+type Spellbound.Character.Body.IContainmentSpace : interface
 type Spellbound.Character.Body.IMotionDriver : interface
+type Spellbound.Character.Body.IMoveSource : interface
 type Spellbound.Character.Body.IPlayableCharacter : interface
 type Spellbound.Character.Body.IReferenceFrameWorld : interface
+type Spellbound.Character.Body.IRescueTarget : interface
+type Spellbound.Character.Body.ISupportProbe : interface
 type Spellbound.Character.Body.InterpolationMath : static class
 type Spellbound.Character.Body.MotionClaim : readonly struct
 type Spellbound.Character.Body.MotionClaims : sealed class
+type Spellbound.Character.Body.PhysicsContainmentSpace : sealed class : Spellbound.Character.Body.IContainmentSpace
+type Spellbound.Character.Body.PhysicsSupportProbe : sealed class : Spellbound.Character.Body.ISupportProbe
 type Spellbound.Character.Body.PlayableCharacters : static class
 type Spellbound.Character.Body.ReferenceFrameBinding : sealed class
 type Spellbound.Character.Body.ReferenceFrameIds : static class
 type Spellbound.Character.Body.ReferenceFrameRider : sealed class : UnityEngine.MonoBehaviour
 type Spellbound.Character.Body.ReferenceFrameSource : abstract class : UnityEngine.MonoBehaviour, Spellbound.Core.ReferenceFrames.IReferenceFrame
+type Spellbound.Character.Body.RescueLadder : sealed class
+type Spellbound.Character.Body.RescueRung : enum
+type Spellbound.Character.Body.RescueStep : readonly struct
+type Spellbound.Character.Body.Rescuer : sealed class
 type Spellbound.Character.Body.ResizableCapsuleCollider : class
 type Spellbound.Character.Body.RidingSettings : sealed class : UnityEngine.ScriptableObject, Spellbound.Core.Authoring.IAuthoredDefinition
 type Spellbound.Character.Body.RigidbodyReferenceFrameSource : sealed class : Spellbound.Character.Body.ReferenceFrameSource
 type Spellbound.Character.Body.RotationMath : static class
+type Spellbound.Character.Body.SettingsRescueTarget : sealed class : Spellbound.Character.Body.IRescueTarget
 type Spellbound.Character.Body.SlopeMath : static class
+type Spellbound.Character.Body.SupportGate : sealed class : UnityEngine.MonoBehaviour
 type Spellbound.Character.Body.SupportProbeMath : static class
 type Spellbound.Character.Body.TransformReferenceFrameSource : sealed class : Spellbound.Character.Body.ReferenceFrameSource
 type Spellbound.Character.Body.VelocityMath : static class
@@ -383,9 +480,12 @@ type Spellbound.Character.Cinemachine.CharacterCinemachineKit : static class
 type Spellbound.Character.Cinemachine.ClampedFollowDamping : class : Unity.Cinemachine.CinemachineExtension
 type Spellbound.Character.Cinemachine.ThirdPersonFollowZoom : class : UnityEngine.MonoBehaviour, Unity.Cinemachine.IInputAxisOwner
 type Spellbound.Character.Editor.BuildRagdollWindow : sealed class : UnityEditor.EditorWindow
+type Spellbound.Character.Editor.ContainmentGizmos : static class
+type Spellbound.Character.Editor.ContainmentSettingsEditor : sealed class : UnityEditor.Editor
 type Spellbound.Character.Editor.RideableColliderCheck : sealed class : Spellbound.Core.Authoring.Editor.IDefinitionCheck<Spellbound.Character.Body.RidingSettings>
 type Spellbound.Character.Editor.RigKindMapping : static class
 type Spellbound.Character.Editor.SnapToGroundMenu : static class
+type Spellbound.Character.GeoForge.GeoForgeContainmentSpace : sealed class : Spellbound.Character.Body.IContainmentSpace
 type Spellbound.Character.Presentation.Editor.MeasureCapsuleFromMeshMenu : static class
 type Spellbound.Character.Presentation.MeshBoundsMath : static class
 type Spellbound.Character.Presentation.WornPieceRebinding : static class
@@ -418,6 +518,25 @@ type Spellbound.Character.Rig.SocketTable : sealed class
 type Spellbound.Character.StateMachine.BodyContext : class
 type Spellbound.Character.StateMachine.BodyState : abstract class : Spellbound.StateMachine.State
 type Spellbound.Character.StateMachine.CharacterStateMachineKit : static class
+type Spellbound.Character.WorldObjects.CharacterWorldObjectsKit : static class
+type Spellbound.Character.WorldObjects.InstanceRide : sealed class
+type Spellbound.Character.WorldObjects.WorldObjectsReferenceFrameWorld : sealed class : UnityEngine.MonoBehaviour, Spellbound.Character.Body.IReferenceFrameWorld
+ContainmentSettings.checkStride : int
+ContainmentSettings.embeddedChecksBeforeRescue : int
+ContainmentSettings.fallbackAnchor : Vector3
+ContainmentSettings.fallbackAnchor.x : float
+ContainmentSettings.fallbackAnchor.y : float
+ContainmentSettings.fallbackAnchor.z : float
+ContainmentSettings.floorHeight : float
+ContainmentSettings.hasFloor : bool
+ContainmentSettings.maxOpenSearchMetres : float
+ContainmentSettings.openSearchStepMetres : float
+ContainmentSettings.rescuePriority : int
+ContainmentSettings.supportHoldTimeoutSeconds : float
+ContainmentSettings.supportLayers : LayerMask
+ContainmentSettings.supportReachMetres : float
+ContainmentSettings.sustainedFallSeconds : float
+ContainmentSettings.sustainedFallSpeed : float
 RidingSettings.rideableLayers : LayerMask
 RigContract.grips : RigGrip list
 RigContract.hips : RigHips

@@ -1,0 +1,25 @@
+{
+  "name": "Spellbound.Character.WorldObjects",
+  "rootNamespace": "Spellbound.Character.WorldObjects",
+  "references": ["Spellbound.Core", "Spellbound.Character.Body", "Spellbound.WorldObjects", "Unity.Burst", "Unity.Collections", "Unity.Mathematics"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": ["SPELLBOUND_CORE", "SPELLBOUND_WORLDOBJECTS"],
+  "versionDefines": [
+    {
+      "name": "com.spellboundstudios.core",
+      "expression": "[1.1.9,3.0.0)",
+      "define": "SPELLBOUND_CORE"
+    },
+    {
+      "name": "com.spellboundstudios.worldobjects",
+      "expression": "[0.0.0,2.0.0)",
+      "define": "SPELLBOUND_WORLDOBJECTS"
+    }
+  ],
+  "noEngineReferences": false
+}
